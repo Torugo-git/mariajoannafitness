@@ -1,1 +1,834 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin - MALALA STORE</title>
+
+  <!-- Firebase SDK (Compat version) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { brand: { orange: '#FF5500', deepOrange: '#E64A00' } } } }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background: #FF5500; border-radius: 3px; }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- LOGIN OVERLAY -->
+  <div id="loginModal" class="fixed inset-0 z-50 bg-gray-900/90 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-3xl p-8 shadow-2xl border border-gray-100 text-center relative">
+      <img src="logo-circle.png" alt="Malala Store" class="w-16 h-16 rounded-full mx-auto mb-4 border-2 border-[#FF5500] shadow-md">
+      <h2 class="text-2xl font-black text-gray-900">Painel do Lojista</h2>
+      <p class="text-xs text-gray-500 mt-1 mb-6">Digite a senha da conta da loja para gerenciar o sistema.</p>
+
+      <form onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <input type="password" id="adminPassword" placeholder="Senha do Firebase Auth" class="w-full bg-gray-50 border border-gray-200 text-sm text-center font-bold py-3 px-4 rounded-xl focus:outline-none focus:border-[#FF5500] transition-all" required>
+          <p id="loginError" class="text-xs text-red-500 font-bold mt-2 hidden">Senha incorreta ou acesso negado!</p>
+        </div>
+        <button type="submit" class="w-full bg-[#FF5500] hover:bg-[#E64A00] text-white font-bold py-3.5 rounded-xl text-sm transition-all shadow-lg shadow-[#FF5500]/25 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-lock-open"></i> Entrar no Gerenciador
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- HEADER ADMIN -->
+  <header class="bg-gray-900 text-white border-b border-gray-800 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="logo-circle.png" alt="Malala Store" class="w-10 h-10 rounded-full border border-[#FF5500]">
+        <div>
+          <span class="text-base font-black tracking-wider text-white block leading-none font-serif">MALALA STORE</span>
+          <span class="text-[10px] text-[#FF5500] font-bold tracking-widest uppercase">Painel de Gestão</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="index.html" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-bold px-4 py-2.5 rounded-xl border border-gray-700 transition-all flex items-center gap-2">
+          <i class="fa-solid fa-store text-[#FF5500]"></i>
+          <span class="hidden sm:inline">Ver Site ao Vivo</span>
+        </a>
+        <button onclick="logout()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-bold px-3 py-2.5 rounded-xl border border-red-500/20 transition-all">
+          <i class="fa-solid fa-right-from-bracket"></i> Sair
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+    <!-- DASHBOARD FINANCEIRO -->
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <div>
+          <span class="text-[10px] text-gray-400 font-bold uppercase block">Faturamento (Pagos)</span>
+          <span class="text-xl font-black text-[#FF5500]" id="dashFaturamento">R$ 0,00</span>
+        </div>
+        <div class="p-3 bg-[#FF5500]/10 text-[#FF5500] rounded-xl text-lg"><i class="fa-solid fa-sack-dollar"></i></div>
+      </div>
+      <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <div>
+          <span class="text-[10px] text-gray-400 font-bold uppercase block">Ticket Médio</span>
+          <span class="text-xl font-black text-gray-900" id="dashTicket">R$ 0,00</span>
+        </div>
+        <div class="p-3 bg-emerald-100 text-emerald-600 rounded-xl text-lg"><i class="fa-solid fa-chart-line"></i></div>
+      </div>
+      <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <div>
+          <span class="text-[10px] text-gray-400 font-bold uppercase block">Vendas Concluídas</span>
+          <span class="text-xl font-black text-gray-900" id="dashVendas">0</span>
+        </div>
+        <div class="p-3 bg-blue-100 text-blue-600 rounded-xl text-lg"><i class="fa-solid fa-handshake"></i></div>
+      </div>
+      <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <div>
+          <span class="text-[10px] text-gray-400 font-bold uppercase block">Total Catálogo</span>
+          <span class="text-xl font-black text-gray-900" id="statTotal">0</span>
+        </div>
+        <div class="p-3 bg-purple-100 text-purple-600 rounded-xl text-lg"><i class="fa-solid fa-boxes-stacked"></i></div>
+      </div>
+    </div>
+
+    <!-- MENU DE NAVEGAÇÃO INTERNA -->
+    <div class="flex items-center gap-2 mb-6 border-b border-gray-200 pb-3">
+      <button onclick="switchTab('products')" id="tabProductsBtn" class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-[#FF5500] text-white shadow-md shadow-[#FF5500]/20 flex items-center gap-2">
+        <i class="fa-solid fa-boxes-stacked"></i> Catálogo de Produtos
+      </button>
+      <button onclick="switchTab('orders')" id="tabOrdersBtn" class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 flex items-center gap-2">
+        <i class="fa-solid fa-receipt text-[#FF5500]"></i> Pedidos & Vendas <span id="ordersBadge" class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded-full font-black">0</span>
+      </button>
+    </div>
+
+    <!-- ABA 1: CATÁLOGO DE PRODUTOS -->
+    <div id="tabProductsView">
+      <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <input type="text" id="adminSearch" onkeyup="renderAdminTable()" placeholder="Buscar produto..." class="bg-gray-50 border border-gray-200 text-xs py-2.5 px-4 rounded-xl w-full sm:w-72 focus:outline-none focus:border-[#FF5500]">
+        
+        <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
+          <button onclick="resetDefaultCatalog()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-4 py-2.5 rounded-xl text-xs transition-all border border-gray-200 flex items-center gap-2">
+            <i class="fa-solid fa-rotate-left"></i> Restaurar Padrão
+          </button>
+          <button onclick="openAddProductModal()" class="bg-[#FF5500] hover:bg-[#E64A00] text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all shadow-md shadow-[#FF5500]/20 flex items-center gap-2">
+            <i class="fa-solid fa-plus"></i> Novo Produto
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-gray-50 border-b border-gray-200 text-gray-500 font-bold uppercase tracking-wider">
+                <th class="p-4">Produto</th>
+                <th class="p-4">Categoria</th>
+                <th class="p-4 text-center">Estoque Rápido</th>
+                <th class="p-4">Preço</th>
+                <th class="p-4 text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsTable" class="divide-y divide-gray-100"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 2: PEDIDOS E VENDAS -->
+    <div id="tabOrdersView" class="hidden space-y-4">
+      <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+        <div>
+          <h3 class="font-extrabold text-gray-900 text-base">Acompanhamento de Vendas & Clientes</h3>
+          <p class="text-xs text-gray-500">Gira os pagamentos, status logístico e datas das encomendas.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+          <input type="text" id="orderSearch" onkeyup="resetPagination(); renderOrdersTable()" placeholder="Buscar nome, CPF, ID..." class="bg-gray-50 border border-gray-200 text-xs py-2 px-4 rounded-xl w-full sm:w-48 focus:outline-none focus:border-[#FF5500]">
+          <select id="filterDate" onchange="resetPagination(); renderOrdersTable()" class="bg-gray-50 border border-gray-200 text-xs text-gray-700 font-bold py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]">
+            <option value="all">Data: Todas</option>
+            <option value="today">Hoje</option>
+            <option value="week">Últimos 7 dias</option>
+            <option value="month">Últimos 30 dias</option>
+          </select>
+          <select id="filterPayment" onchange="resetPagination(); renderOrdersTable()" class="bg-gray-50 border border-gray-200 text-xs text-gray-700 font-bold py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]">
+            <option value="all">Pagamento: Todos</option>
+            <option value="Pago">Apenas Pagos</option>
+            <option value="Pendente">Apenas Pendentes</option>
+            <option value="Cancelado">Apenas Cancelados</option>
+          </select>
+          <select id="filterDelivery" onchange="resetPagination(); renderOrdersTable()" class="bg-gray-50 border border-gray-200 text-xs text-gray-700 font-bold py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]">
+            <option value="all">Envio: Todos</option>
+            <option value="Recebido">Pedido Recebido</option>
+            <option value="Preparando">Em Separação</option>
+            <option value="Caminho">A Caminho</option>
+            <option value="Entregue">Entregue</option>
+          </select>
+          <button onclick="loadOrders()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2">
+            <i class="fa-solid fa-arrows-rotate text-[#FF5500]"></i> Atualizar
+          </button>
+        </div>
+      </div>
+
+      <div id="bulkActionsPanel" class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="selectAllOrders" onchange="toggleSelectAllOrders()" class="w-4 h-4 text-[#FF5500] rounded focus:ring-[#FF5500]">
+          <label for="selectAllOrders" class="text-xs font-bold text-gray-700 cursor-pointer">Selecionar Todos na Tela</label>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+          <span class="text-[10px] font-bold text-gray-500 uppercase">Ação em Lote:</span>
+          <select id="bulkActionType" class="text-xs bg-gray-50 border border-gray-200 py-1.5 px-2 rounded-lg focus:outline-none focus:border-[#FF5500]">
+            <option value="">Selecione...</option>
+            <option disabled>--- PAGAMENTO ---</option>
+            <option value="pay_Pago">Marcar como Pago</option>
+            <option value="pay_Pendente">Marcar como Pendente</option>
+            <option value="pay_Cancelado">Marcar como Cancelado</option>
+            <option disabled>--- ENVIO ---</option>
+            <option value="del_Recebido">1. Recebido</option>
+            <option value="del_Preparando">2. Preparando</option>
+            <option value="del_Caminho">3. A Caminho</option>
+            <option value="del_Entregue">4. Entregue</option>
+          </select>
+          <button onclick="applyBulkAction(event)" class="bg-[#FF5500] hover:bg-[#E64A00] text-white font-bold px-3 py-1.5 rounded-lg text-[10px] uppercase transition-all shadow-sm">
+            Aplicar
+          </button>
+        </div>
+      </div>
+
+      <div id="adminOrdersContainer" class="space-y-4"></div>
+    </div>
+  </main>
+
+  <!-- MODAL DE ADICIONAR / EDITAR PRODUTO -->
+  <div id="productFormModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white max-w-2xl w-full rounded-3xl p-6 shadow-2xl border border-gray-100 relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeProductFormModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+      <h3 class="text-xl font-extrabold text-gray-900 mb-5" id="formModalTitle">Novo Produto</h3>
+      <form onsubmit="saveProduct(event)" class="space-y-4">
+        <input type="hidden" id="editProductId">
+        <div><label class="block text-xs font-bold text-gray-700 mb-1">Nome</label><input type="text" id="formTitle" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl" required></div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Categoria</label>
+            <select id="formCategory" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl" required>
+              <option value="Perfumes">Perfumes</option>
+              <option value="Tecnologia">Tecnologia</option>
+              <option value="Beleza">Beleza</option>
+            </select>
+          </div>
+          <div><label class="block text-xs font-bold text-gray-700 mb-1">Preço</label><input type="number" step="0.01" id="formPrice" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl" required></div>
+          <div><label class="block text-xs font-bold text-gray-700 mb-1">Estoque</label><input type="number" id="formStock" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl" required></div>
+        </div>
+        <div><label class="block text-xs font-bold text-gray-700 mb-1">Selo</label><input type="text" id="formBadge" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl" required></div>
+        
+        <div class="border border-gray-200 p-4 rounded-xl bg-gray-50">
+            <div class="flex justify-between items-center mb-3">
+                <label class="block text-xs font-bold text-gray-700">Imagens (URL)</label>
+                <button type="button" onclick="addExtraImageField()" class="text-xs text-[#FF5500] font-bold hover:underline">+ Adicionar Imagem Extra</button>
+            </div>
+            <div id="imagesContainer" class="space-y-2">
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] font-bold text-gray-500 w-16">Principal</span>
+                    <input type="url" id="formImage" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
+                </div>
+            </div>
+        </div>
+        
+        <div><label class="block text-xs font-bold text-gray-700 mb-1">Descrição</label><textarea id="formDesc" rows="3" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl" required></textarea></div>
+        
+        <div class="flex justify-end gap-3 pt-3 border-t border-gray-100">
+          <button type="button" onclick="closeProductFormModal()" class="px-4 py-2.5 bg-gray-100 rounded-xl text-xs font-bold">Cancelar</button>
+          <button type="submit" class="px-5 py-2.5 bg-[#FF5500] text-white rounded-xl text-xs font-bold">Salvar Produto</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const defaultProducts = [
+      { id: 1, title: 'Smartwatch Series 9 Ultra', category: 'Tecnologia', price: 320.00, stock: 15, badge: 'Lançamento', image: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Caixa de titânio, tela AMOLED com cores vivas e rastreamento completo de saúde e atividades esportivas.' },
+      { id: 2, title: 'Fone Bluetooth TWS Pro', category: 'Tecnologia', price: 180.00, stock: 30, badge: 'Oferta', image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Cancelamento ativo de ruído, som espacial imersivo e bateria com autonomia de até 24 horas.' },
+      { id: 3, title: 'Caixa de Som Bluetooth Premium', category: 'Tecnologia', price: 250.00, stock: 8, badge: 'Alta Potência', image: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Resistente à água IPX7, graves profundos e conexão simultânea com múltiplos dispositivos.' },
+      { id: 11, title: 'Carregador Sem Fio MagSafe 15W Apple', category: 'Tecnologia', price: 160.00, stock: 50, badge: 'Mais Vendido', image: 'https://images.unsplash.com/photo-1622445268465-843d63d6f1bf?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Alinhamento magnético perfeito para recarga rápida sem fio em iPhones e AirPods.' },
+      { id: 4, title: 'Kit Skincare Sérum Vitamina C', category: 'Beleza', price: 149.00, stock: 20, badge: 'Tendência', image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Tratamento facial concentrado para firmeza, hidratação profunda e iluminação natural da pele.' },
+      { id: 5, title: 'Modelador & Escova Secadora 3 em 1', category: 'Beleza', price: 210.00, stock: 12, badge: 'Destaque', image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Seca, alisa e modela com tecnologia cerâmica de íons que protege os fios contra o frizz.' },
+      { id: 12, title: 'Kit Pincéis Profissionais de Maquiagem', category: 'Beleza', price: 129.00, stock: 25, badge: 'Kit VIP', image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Conjunto completo com cerdas macias hipoalergênicas para acabamento impecável.' },
+      { id: 6, title: 'INSOLENCE', category: 'Perfumes', price: 750.00, stock: 5, badge: 'Perfume Árabe', image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=600', images: [], desc: 'O Insolence, da Guerlain, não foi feito para quem quer passar despercebida!\n\n🌸 Violeta envolvente\n💜 Um toque doce e sofisticado\n✨ Uma fragrância marcante, cheia de personalidade!' },
+      { id: 9, title: 'Delilah Pour Femme', category: 'Perfumes', price: 750.00, stock: 7, badge: 'Perfume Árabe', image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Delilah Pour Femme\nUm perfume feminino, sofisticado e envolvente — perfeito para quem ama deixar uma fragrância inesquecível por onde passa. 💗' },
+      { id: 10, title: 'ASAD ELIXIR – Lattafa', category: 'Perfumes', price: 750.00, stock: 3, badge: 'Nicho', image: 'https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Presença marcante, elegância e aquele aroma que não passa despercebido.\n\n✨ Sofisticado\n🔥 Intenso\n🖤 Marcante' },
+      { id: 13, title: 'ASAD BOURBON - Lattafa', category: 'Perfumes', price: 750.00, stock: 10, badge: 'Perfume Árabe', image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Uma fragrância marcante, sofisticada e envolvente para quem gosta de chegar deixando sua assinatura. 🖤✨' },
+      { id: 14, title: 'Fakhar Lattafa', category: 'Perfumes', price: 750.00, stock: 4, badge: 'Importado', image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Fakhar Lattafa traz uma fragrância marcante, sofisticada e envolvente — daquelas que deixam presença mesmo depois que você passa.' }
+    ]; 
+    
+    const defaultFirebaseConfig = {
+      apiKey: "AIzaSyBCkwx1KJS_ZvPM0McJOF7_KbPzwahvZgY",
+      authDomain: "malala-ca5f9.firebaseapp.com",
+      projectId: "malala-ca5f9",
+      storageBucket: "malala-ca5f9.firebasestorage.app",
+      messagingSenderId: "769152463954",
+      appId: "1:769152463954:web:1ee46b91c8e8b4c4d75b8b",
+      measurementId: "G-XSB0EFBQ6E"
+    };
+
+    let adminProducts = [];
+    let db = null;
+    let ordersList = [];
+    
+    let visibleOrdersCount = 10;
+    const ORDERS_PER_PAGE = 10;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initFirebase();
+      loadAdminProducts();
+      
+      if (sessionStorage.getItem('malala_logged') === 'true') {
+        document.getElementById('loginModal').classList.add('hidden');
+        loadOrdersFromCloud();
+      }
+
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user && user.email === 'malalastore.pedidos@gmail.com') {
+          sessionStorage.setItem('malala_logged', 'true');
+          document.getElementById('loginModal').classList.add('hidden');
+          if (ordersList.length === 0) loadOrdersFromCloud();
+        } else {
+          if (sessionStorage.getItem('malala_logged') !== 'true') {
+            document.getElementById('loginModal').classList.remove('hidden');
+          }
+        }
+      });
+    });
+
+    function initFirebase() {
+      try {
+        if (!firebase.apps.length) firebase.initializeApp(defaultFirebaseConfig);
+        db = firebase.firestore();
+        initFirebaseAdminSync();
+      } catch(e) {
+        console.error("Erro ao iniciar Firebase:", e);
+      }
+    }
+
+    function initFirebaseAdminSync() {
+      if (!db) return;
+      db.collection('malala_store').doc('catalog').onSnapshot((doc) => {
+        if (doc.exists && doc.data().products) {
+          adminProducts = doc.data().products.map(p => ({...p, stock: p.stock !== undefined ? p.stock : 10, images: p.images || []}));
+          localStorage.setItem('malala_products', JSON.stringify(adminProducts));
+          renderAdminTable();
+        }
+      });
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const pwd = document.getElementById('adminPassword').value;
+      const adminEmail = 'malalastore.pedidos@gmail.com';
+
+      try {
+        await firebase.auth().signInWithEmailAndPassword(adminEmail, pwd);
+        sessionStorage.setItem('malala_logged', 'true');
+        document.getElementById('loginModal').classList.add('hidden');
+        document.getElementById('loginError').classList.add('hidden');
+        loadOrdersFromCloud();
+      } catch (err) {
+        console.error("❌ Erro de autenticação:", err);
+        document.getElementById('loginError').classList.remove('hidden');
+      }
+    }
+
+    async function logout() {
+      try { await firebase.auth().signOut(); } catch(e){}
+      sessionStorage.removeItem('malala_logged');
+      document.getElementById('loginModal').classList.remove('hidden');
+    }
+
+    async function loadOrdersFromCloud() {
+      const container = document.getElementById('adminOrdersContainer');
+      
+      if (!db) {
+        try { ordersList = JSON.parse(localStorage.getItem('malala_orders') || '[]'); } catch(e){}
+        renderOrdersTable();
+        return;
+      }
+
+      container.innerHTML = `<div class="bg-white p-8 text-center rounded-2xl border border-gray-200"><p class="text-xs font-bold text-gray-400"><i class="fa-solid fa-spinner fa-spin text-[#FF5500] mr-2"></i> Sincronizando pedidos com o Firebase...</p></div>`;
+
+      try {
+        const snapshot = await db.collection('orders').get();
+        
+        let tempOrders = [];
+        snapshot.forEach(doc => {
+          tempOrders.push({ id: doc.id, ...doc.data() });
+        });
+
+        tempOrders.sort((a, b) => {
+          let timeA = a.createdAt?.seconds ? a.createdAt.seconds * 1000 : new Date(a.createdAt || 0).getTime();
+          let timeB = b.createdAt?.seconds ? b.createdAt.seconds * 1000 : new Date(b.createdAt || 0).getTime();
+          return timeB - timeA;
+        });
+
+        ordersList = tempOrders;
+        localStorage.setItem('malala_orders', JSON.stringify(ordersList));
+        renderOrdersTable();
+      } catch (err) {
+        console.error("❌ Erro ao buscar pedidos do Firebase:", err);
+        try { ordersList = JSON.parse(localStorage.getItem('malala_orders') || '[]'); } catch(e){}
+        renderOrdersTable();
+      }
+    }
+
+    function loadOrders() {
+      resetPagination();
+      loadOrdersFromCloud();
+    }
+
+    function resetPagination() {
+      visibleOrdersCount = ORDERS_PER_PAGE;
+    }
+
+    function loadMoreOrders() {
+      visibleOrdersCount += ORDERS_PER_PAGE;
+      renderOrdersTable();
+    }
+
+    function switchTab(tab) {
+      document.getElementById('tabProductsView').classList.toggle('hidden', tab !== 'products');
+      document.getElementById('tabOrdersView').classList.toggle('hidden', tab !== 'orders');
+      
+      const btnActive = "px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-[#FF5500] text-white shadow-md shadow-[#FF5500]/20 flex items-center gap-2";
+      const btnInactive = "px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 flex items-center gap-2";
+      
+      document.getElementById('tabProductsBtn').className = tab === 'products' ? btnActive : btnInactive;
+      document.getElementById('tabOrdersBtn').className = tab === 'orders' ? btnActive : btnInactive;
+    }
+
+    function calculateDashboard(filteredOrders) {
+      let faturamento = 0;
+      let vendas = 0;
+      filteredOrders.forEach(o => {
+        if(o.status === 'Pago') {
+          faturamento += (o.total || o.totalAmount || 0);
+          vendas++;
+        }
+      });
+      const ticket = vendas > 0 ? (faturamento / vendas) : 0;
+      
+      document.getElementById('dashFaturamento').innerText = `R$ ${faturamento.toFixed(2).replace('.',',')}`;
+      document.getElementById('dashTicket').innerText = `R$ ${ticket.toFixed(2).replace('.',',')}`;
+      document.getElementById('dashVendas').innerText = vendas;
+    }
+
+
+    function updateStockInline(id, newStockStr) {
+      const newStock = parseInt(newStockStr, 10);
+      if(isNaN(newStock) || newStock < 0) return alert('Stock inválido.');
+      const p = adminProducts.find(x => String(x.id) === String(id));
+      if(p) { p.stock = newStock; saveToLocalStorage(); }
+    }
+
+    let selectedOrderIds = [];
+
+    function toggleSelectAllOrders() {
+      const isChecked = document.getElementById('selectAllOrders').checked;
+      const checkboxes = document.querySelectorAll('.order-checkbox');
+      selectedOrderIds = [];
+      checkboxes.forEach(cb => {
+        cb.checked = isChecked;
+        if(isChecked) selectedOrderIds.push(cb.value);
+      });
+    }
+
+    function toggleOrderSelection(orderId, isChecked) {
+      if(isChecked) {
+        if(!selectedOrderIds.includes(orderId)) selectedOrderIds.push(orderId);
+      } else {
+        selectedOrderIds = selectedOrderIds.filter(id => id !== orderId);
+      }
+      const allCheckboxes = document.querySelectorAll('.order-checkbox');
+      const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
+      document.getElementById('selectAllOrders').checked = allCheckboxes.length > 0 && allChecked;
+    }
+
+    async function applyBulkAction(event) {
+      if(selectedOrderIds.length === 0) return alert('Selecione pelo menos um pedido.');
+      const action = document.getElementById('bulkActionType').value;
+      if(!action) return alert('Selecione uma ação.');
+
+      const isPayment = action.startsWith('pay_');
+      const newStatus = action.split('_')[1];
+
+      const confirmMsg = `Tem certeza que deseja alterar o status de ${isPayment ? 'pagamento' : 'envio'} para "${newStatus}" em ${selectedOrderIds.length} pedidos?`;
+      if(!confirm(confirmMsg)) return;
+
+      const btn = event ? event.target : document.querySelector('button[onclick="applyBulkAction(event)"]');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+      btn.disabled = true;
+
+      for (let orderId of selectedOrderIds) {
+        if (isPayment) await updatePaymentStatus(orderId, newStatus, true);
+        else await updateDeliveryStatus(orderId, newStatus, true);
+      }
+
+      document.getElementById('selectAllOrders').checked = false;
+      selectedOrderIds = [];
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+      alert('Ação em lote aplicada com sucesso!');
+      renderOrdersTable();
+    }
+
+    async function updatePaymentStatus(orderId, newStatus, skipRender = false) {
+      const ord = ordersList.find(o => String(o.id) === String(orderId));
+      if (ord) { ord.status = newStatus; localStorage.setItem('malala_orders', JSON.stringify(ordersList)); }
+      if (db) {
+        try { await db.collection('orders').doc(String(orderId)).update({ status: newStatus }); }
+        catch (err) { console.warn("Atualizado localmente."); }
+      }
+      if(!skipRender) renderOrdersTable();
+    }
+
+    async function updateDeliveryStatus(orderId, newStatus, skipRender = false) {
+      const ord = ordersList.find(o => String(o.id) === String(orderId));
+      if (ord) { ord.deliveryStatus = newStatus; localStorage.setItem('malala_orders', JSON.stringify(ordersList)); }
+      if (db) {
+        try { await db.collection('orders').doc(String(orderId)).update({ deliveryStatus: newStatus }); }
+        catch (err) { console.warn("Atualizado localmente."); }
+      }
+      if(!skipRender) renderOrdersTable();
+    }
+
+    function printOrderLabel(orderId) {
+      const ord = ordersList.find(o => String(o.id) === String(orderId));
+      if(!ord) return;
+      const payer = ord.payer || {};
+      const addr = payer.address || {};
+
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Etiqueta de Envio - ${orderId}</title>
+            <style>
+              body { font-family: sans-serif; padding: 20px; max-width: 400px; border: 2px solid #000; margin: 20px; }
+              h2 { margin: 0 0 10px 0; font-size: 18px; border-bottom: 1px solid #000; padding-bottom: 5px; }
+              p { margin: 5px 0; font-size: 14px; }
+              .bold { font-weight: bold; }
+              .footer { margin-top: 20px; font-size: 10px; color: #555; text-align: center; border-top: 1px dashed #ccc; padding-top: 10px; }
+            </style>
+          </head>
+          <body>
+            <h2>DESTINATÁRIO</h2>
+            <p class="bold">${payer.name || 'Cliente'}</p>
+            <p>CPF: ${payer.cpf || 'Não informado'}</p>
+            <br>
+            <p>${addr.street || ''}, ${addr.number || ''}</p>
+            <p>${addr.neighborhood || ''}</p>
+            <p class="bold">${addr.city || ''}</p>
+            <p class="bold">CEP: ${addr.cep || ''}</p>
+
+            <div class="footer">
+              Pedido: ${orderId} - Malala Store
+            </div>
+
+            \x3Cscript>
+              window.onload = function() { window.print(); window.close(); }
+            \x3C/script>
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+    }
+
+    function renderOrdersTable() {
+      const search = document.getElementById('orderSearch').value.toLowerCase();
+      const filterPay = document.getElementById('filterPayment').value;
+      const filterDel = document.getElementById('filterDelivery').value;
+      const filterDate = document.getElementById('filterDate').value;
+      const now = new Date();
+
+      let filtered = ordersList;
+
+      if (search) {
+        filtered = filtered.filter(o => {
+          const payer = o.payer || {};
+          const addr = payer.address || {};
+          const itemsStr = (o.items || []).map(i => i.title).join(' ').toLowerCase();
+
+          const searchStr = `${o.id || ''} ${payer.name || ''} ${payer.email || ''} ${payer.cpf || ''} ${addr.street || ''} ${addr.neighborhood || ''} ${addr.city || ''} ${addr.cep || ''} ${itemsStr}`.toLowerCase();
+          return searchStr.includes(search);
+        });
+      }
+
+      if(filterPay !== 'all') filtered = filtered.filter(o => (o.status || 'Pendente') === filterPay);
+      if(filterDel !== 'all') filtered = filtered.filter(o => (o.deliveryStatus || 'Recebido') === filterDel);
+      
+      if(filterDate !== 'all') {
+        filtered = filtered.filter(o => {
+          if (!o.createdAt) return true; 
+          let orderDate = null;
+          if (o.createdAt.toDate) orderDate = o.createdAt.toDate();
+          else if (typeof o.createdAt === 'string' || typeof o.createdAt === 'number') orderDate = new Date(o.createdAt);
+          else if (o.createdAt.seconds) orderDate = new Date(o.createdAt.seconds * 1000);
+          else return true;
+          
+          if (isNaN(orderDate)) return true;
+
+          if (filterDate === 'today') return orderDate.toDateString() === now.toDateString();
+          if (filterDate === 'week') { const weekAgo = new Date(); weekAgo.setDate(now.getDate() - 7); return orderDate >= weekAgo; }
+          if (filterDate === 'month') { const monthAgo = new Date(); monthAgo.setDate(now.getDate() - 30); return orderDate >= monthAgo; }
+          return true;
+        });
+      }
+
+      document.getElementById('ordersBadge').innerText = filtered.length;
+      calculateDashboard(ordersList); 
+
+      const container = document.getElementById('adminOrdersContainer');
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="bg-white p-12 text-center rounded-2xl border border-gray-200"><p class="font-bold text-gray-400">Nenhum pedido atende aos filtros.</p></div>`;
+        return;
+      }
+
+      // Paginação por lotes (exibe até visibleOrdersCount)
+      const paginatedOrders = filtered.slice(0, visibleOrdersCount);
+
+      let html = paginatedOrders.map(ord => {
+        const payer = ord.payer || {};
+        const payStatus = ord.status || 'Pendente';
+        const delStatus = ord.deliveryStatus || 'Recebido';
+        const statusClass = payStatus === 'Pago' ? 'bg-emerald-100 text-emerald-800' : payStatus === 'Cancelado' ? 'bg-red-100 text-red-800' : 'bg-amber-100 text-amber-800';
+
+        let formattedDate = 'Data recente';
+        if (ord.createdAt) {
+           let dateObj = null;
+           if (ord.createdAt.toDate) dateObj = ord.createdAt.toDate();
+           else if (typeof ord.createdAt === 'string' || typeof ord.createdAt === 'number') dateObj = new Date(ord.createdAt);
+           else if (ord.createdAt.seconds) dateObj = new Date(ord.createdAt.seconds * 1000);
+           
+           if (dateObj && !isNaN(dateObj)) {
+              formattedDate = dateObj.toLocaleDateString('pt-BR') + ' às ' + dateObj.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+           }
+        }
+
+        const itemsHtml = (ord.items || []).map(i => `<div class="flex justify-between text-xs py-1 border-b border-gray-100 last:border-0"><span class="font-bold text-gray-800">${i.quantity}x ${i.title}</span><span class="text-gray-600 font-mono">R$ ${((i.price || 0)*i.quantity).toFixed(2).replace('.',',')}</span></div>`).join('');
+        const totalVal = ord.total || ord.totalAmount || 0;
+
+        const isChecked = selectedOrderIds.includes(ord.id) ? 'checked' : '';
+
+        return `
+          <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+              <div class="flex items-center gap-3">
+                <input type="checkbox" value="${ord.id}" ${isChecked} onchange="toggleOrderSelection('${ord.id}', this.checked)" class="order-checkbox w-4 h-4 text-[#FF5500] rounded focus:ring-[#FF5500] mr-2">
+                <span class="font-mono text-xs font-black bg-gray-100 px-2 py-1 rounded-md text-gray-700">${ord.id}</span>
+                <span class="text-xs font-bold text-gray-900">${payer.name || payer.email || 'Cliente'}</span>
+                <span class="text-[10px] text-gray-400 ml-2 hidden sm:inline"><i class="fa-regular fa-clock"></i> ${formattedDate}</span>
+              </div>
+              <span class="text-xs font-black text-[#FF5500]">R$ ${totalVal.toFixed(2).replace('.',',')}</span>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-4 bg-gray-50 p-3 rounded-xl border border-gray-100">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-bold text-gray-500 uppercase">Pagamento:</span>
+                <select onchange="updatePaymentStatus('${ord.id}', this.value)" class="text-[10px] uppercase font-black px-2 py-1 rounded-md focus:outline-none border border-transparent hover:border-gray-300 ${statusClass}">
+                  <option value="Pendente" ${payStatus === 'Pendente'?'selected':''}>Pendente</option>
+                  <option value="Pago" ${payStatus === 'Pago'?'selected':''}>Pago</option>
+                  <option value="Cancelado" ${payStatus === 'Cancelado'?'selected':''}>Cancelado</option>
+                </select>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-bold text-gray-500 uppercase">Envio:</span>
+                <select onchange="updateDeliveryStatus('${ord.id}', this.value)" class="text-[10px] uppercase font-black px-2 py-1 rounded-md bg-white border border-gray-200 focus:outline-none focus:border-[#FF5500]">
+                  <option value="Recebido" ${delStatus === 'Recebido'?'selected':''}>1. Recebido</option>
+                  <option value="Preparando" ${delStatus === 'Preparando'?'selected':''}>2. Preparando</option>
+                  <option value="Caminho" ${delStatus === 'Caminho'?'selected':''}>3. A Caminho</option>
+                  <option value="Entregue" ${delStatus === 'Entregue'?'selected':''}>4. Entregue</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
+              <div>
+                <p class="text-[10px] font-bold text-gray-400 mb-1">ENDEREÇO</p>
+                <div class="text-xs bg-gray-50 p-2 rounded-lg border border-gray-100 flex justify-between items-start">
+                  <span>${payer.address?.street || 'N/A'}, ${payer.address?.number || 'N/A'}<br>${payer.address?.neighborhood || ''} - ${payer.address?.city || 'N/A'}<br>CEP: ${payer.address?.cep || 'N/A'}</span>
+                  <button onclick="printOrderLabel('${ord.id}')" class="text-[#FF5500] hover:text-[#E64A00] transition-colors p-1" title="Imprimir Etiqueta de Envio">
+                    <i class="fa-solid fa-print"></i>
+                  </button>
+                </div>
+              </div>
+              <div><p class="text-[10px] font-bold text-gray-400 mb-1">ITENS</p><div class="bg-gray-50 p-2 rounded-lg border border-gray-100 space-y-1">${itemsHtml}</div></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Botão "Carregar Mais" se houver mais pedidos filtrados para exibir
+      if (visibleOrdersCount < filtered.length) {
+        html += `
+          <div class="flex justify-center mt-6 pt-4 border-t border-gray-200">
+            <button onclick="loadMoreOrders()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold px-6 py-3 rounded-xl transition-all border border-gray-200 shadow-sm flex items-center gap-2">
+               <i class="fa-solid fa-plus text-[#FF5500]"></i> Carregar Mais Pedidos (${filtered.length - visibleOrdersCount} restantes)
+            </button>
+          </div>
+        `;
+      }
+      
+      container.innerHTML = html;
+    }
+
+    function loadAdminProducts() {
+      try { 
+          const stored = JSON.parse(localStorage.getItem('malala_products') || '[]'); 
+          if(stored.length > 0) adminProducts = stored;
+          else adminProducts = [...defaultProducts];
+      } catch(e){ adminProducts = [...defaultProducts]; }
+      renderAdminTable();
+    }
+
+    function renderAdminTable() {
+      const q = document.getElementById('adminSearch').value.toLowerCase();
+      const filtered = adminProducts.filter(p => p.title.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+      document.getElementById('statTotal').innerText = adminProducts.length;
+      const tbody = document.getElementById('adminProductsTable');
+
+      tbody.innerHTML = filtered.map(p => `
+        <tr class="hover:bg-gray-50/80 transition-colors border-b border-gray-50">
+          <td class="p-3 flex items-center gap-3"><img src="${p.image || ''}" class="w-10 h-10 object-cover rounded-lg border border-gray-200"><div><p class="font-bold text-gray-900">${p.title}</p></div></td>
+          <td class="p-3 font-bold text-gray-700">${p.category}</td>
+          <td class="p-3 text-center"><input type="number" onchange="updateStockInline(${p.id}, this.value)" value="${p.stock}" class="w-16 bg-white border border-gray-200 text-xs font-bold p-1.5 rounded focus:border-[#FF5500] focus:outline-none text-center shadow-sm"></td>
+          <td class="p-3 font-black text-gray-900">R$ ${p.price.toFixed(2).replace('.',',')}</td>
+          <td class="p-3 text-right">
+            <button onclick="editProduct(${p.id})" class="p-2 bg-gray-100 text-gray-700 hover:text-[#FF5500] rounded-lg mr-1 transition-colors" title="Editar Produto"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteProduct(${p.id})" class="p-2 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg transition-colors" title="Excluir Produto"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function saveToLocalStorage() {
+      localStorage.setItem('malala_products', JSON.stringify(adminProducts));
+      renderAdminTable();
+      if(db) db.collection('malala_store').doc('catalog').set({products: adminProducts, updatedAt: firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
+    }
+
+    let extraImagesCount = 0;
+
+    function addExtraImageField(val='') {
+      if (extraImagesCount >= 5) return alert('Máx. 5 imagens extra.');
+      extraImagesCount++;
+      const id = `extraImg_${extraImagesCount}`;
+      const div = document.createElement('div');
+      div.className = "flex items-center gap-2 mt-2"; 
+      div.id = `container_${id}`;
+      div.innerHTML = `
+          <span class="text-[10px] font-bold text-gray-500 w-16 text-right">Extra ${extraImagesCount}</span>
+          <input type="url" id="${id}" value="${val}" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]">
+          <button type="button" onclick="document.getElementById('container_${id}').remove(); extraImagesCount--;" class="text-red-500 p-1"><i class="fa-solid fa-trash text-xs"></i></button>
+      `;
+      document.getElementById('imagesContainer').appendChild(div);
+    }
+
+    function getExtraImages() { 
+        const arr = []; 
+        for(let i=1; i<=10; i++) { 
+            const el = document.getElementById(`extraImg_${i}`); 
+            if(el && el.value.trim() !== '') arr.push(el.value.trim()); 
+        } 
+        return arr; 
+    }
+    
+    function openAddProductModal() { 
+        document.getElementById('editProductId').value = ''; 
+        document.getElementById('formModalTitle').innerText = 'Novo Produto';
+        document.getElementById('formTitle').value = '';
+        document.getElementById('formCategory').value = 'Perfumes';
+        document.getElementById('formPrice').value = '';
+        document.getElementById('formStock').value = '10';
+        document.getElementById('formBadge').value = 'Lançamento';
+        document.getElementById('formDesc').value = '';
+        
+        extraImagesCount = 0;
+        document.getElementById('imagesContainer').innerHTML = `
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-bold text-gray-500 w-16">Principal</span>
+                <input type="url" id="formImage" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
+            </div>
+        `;
+        document.getElementById('productFormModal').classList.remove('hidden'); 
+    }
+
+    function editProduct(id) {
+        const p = adminProducts.find(x => String(x.id) === String(id));
+        if (!p) return;
+
+        document.getElementById('editProductId').value = p.id;
+        document.getElementById('formModalTitle').innerText = 'Editar Produto';
+        document.getElementById('formTitle').value = p.title;
+        document.getElementById('formCategory').value = p.category;
+        document.getElementById('formPrice').value = p.price;
+        document.getElementById('formStock').value = p.stock !== undefined ? p.stock : 10;
+        document.getElementById('formBadge').value = p.badge;
+        document.getElementById('formDesc').value = p.desc;
+        
+        extraImagesCount = 0;
+        document.getElementById('imagesContainer').innerHTML = `
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-bold text-gray-500 w-16">Principal</span>
+                <input type="url" id="formImage" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
+            </div>
+        `;
+        document.getElementById('formImage').value = p.image;
+        
+        if (p.images && p.images.length > 0) p.images.forEach(imgUrl => addExtraImageField(imgUrl));
+        document.getElementById('productFormModal').classList.remove('hidden');
+    }
+
+    function closeProductFormModal() { document.getElementById('productFormModal').classList.add('hidden'); }
+    
+    function saveProduct(e) {
+      e.preventDefault();
+      const id = document.getElementById('editProductId').value;
+      const data = {
+        title: document.getElementById('formTitle').value, category: document.getElementById('formCategory').value,
+        price: parseFloat(document.getElementById('formPrice').value), stock: parseInt(document.getElementById('formStock').value),
+        badge: document.getElementById('formBadge').value, image: document.getElementById('formImage').value,
+        desc: document.getElementById('formDesc').value, images: getExtraImages()
+      };
+
+      if (id) {
+          const p = adminProducts.find(x => String(x.id) === String(id));
+          if(p) Object.assign(p, data);
+      } else { adminProducts.unshift({ id: Date.now(), ...data }); }
+      
+      saveToLocalStorage(); 
+      closeProductFormModal();
+    }
+    
+    function deleteProduct(id) { 
+        if(confirm('Excluir este produto?')) { 
+            adminProducts = adminProducts.filter(x => String(x.id) !== String(id)); 
+            saveToLocalStorage(); 
+        } 
+    }
+
+    function resetDefaultCatalog() {
+      if (confirm('Restaurar catálogo padrão? Alterações serão perdidas.')) {
+        adminProducts = [...defaultProducts];
+        saveToLocalStorage();
+      }
+    }
+  </script>
+</body>
+</html>
 
