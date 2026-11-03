@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel Admin - MALALA STORE</title>
+  <title>Painel Admin - Maria Joanna Fitness</title>
 
   <!-- Firebase SDK (Compat version) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -14,14 +14,14 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: { extend: { colors: { brand: { orange: '#FF5500', deepOrange: '#E64A00' } } } }
+      theme: { extend: { colors: { brand: { orange: '#FF007F', deepOrange: '#D10069' } } } }
     }
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #f1f1f1; }
-    ::-webkit-scrollbar-thumb { background: #FF5500; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: #FF007F; border-radius: 3px; }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-900 font-sans antialiased min-h-screen flex flex-col">
@@ -29,16 +29,16 @@
   <!-- LOGIN OVERLAY -->
   <div id="loginModal" class="fixed inset-0 z-50 bg-gray-900/90 backdrop-blur-md flex items-center justify-center p-4">
     <div class="bg-white max-w-md w-full rounded-3xl p-8 shadow-2xl border border-gray-100 text-center relative">
-      <img src="logo-circle.png" alt="Malala Store" class="w-16 h-16 rounded-full mx-auto mb-4 border-2 border-[#FF5500] shadow-md">
+      <img src="logo-circle.png" alt="Maria Joanna Fitness" class="w-16 h-16 rounded-full mx-auto mb-4 border-2 border-[#FF007F] shadow-md">
       <h2 class="text-2xl font-black text-gray-900">Painel do Lojista</h2>
       <p class="text-xs text-gray-500 mt-1 mb-6">Digite a senha da conta da loja para gerenciar o sistema.</p>
 
       <form onsubmit="handleLogin(event)" class="space-y-4">
         <div>
-          <input type="password" id="adminPassword" placeholder="Senha do Firebase Auth" class="w-full bg-gray-50 border border-gray-200 text-sm text-center font-bold py-3 px-4 rounded-xl focus:outline-none focus:border-[#FF5500] transition-all" required>
+          <input type="password" id="adminPassword" placeholder="Senha do Firebase Auth" class="w-full bg-gray-50 border border-gray-200 text-sm text-center font-bold py-3 px-4 rounded-xl focus:outline-none focus:border-[#FF007F] transition-all" required>
           <p id="loginError" class="text-xs text-red-500 font-bold mt-2 hidden">Senha incorreta ou acesso negado!</p>
         </div>
-        <button type="submit" class="w-full bg-[#FF5500] hover:bg-[#E64A00] text-white font-bold py-3.5 rounded-xl text-sm transition-all shadow-lg shadow-[#FF5500]/25 flex items-center justify-center gap-2">
+        <button type="submit" class="w-full bg-[#FF007F] hover:bg-[#D10069] text-white font-bold py-3.5 rounded-xl text-sm transition-all shadow-lg shadow-[#FF007F]/25 flex items-center justify-center gap-2">
           <i class="fa-solid fa-lock-open"></i> Entrar no Gerenciador
         </button>
       </form>
@@ -49,15 +49,15 @@
   <header class="bg-gray-900 text-white border-b border-gray-800 sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <img src="logo-circle.png" alt="Malala Store" class="w-10 h-10 rounded-full border border-[#FF5500]">
+        <img src="logo-circle.png" alt="Maria Joanna Fitness" class="w-10 h-10 rounded-full border border-[#FF007F]">
         <div>
-          <span class="text-base font-black tracking-wider text-white block leading-none font-serif">MALALA STORE</span>
-          <span class="text-[10px] text-[#FF5500] font-bold tracking-widest uppercase">Painel de Gestão</span>
+          <span class="text-base font-black tracking-wider text-white block leading-none font-serif">Maria Joanna Fitness</span>
+          <span class="text-[10px] text-[#FF007F] font-bold tracking-widest uppercase">Painel de Gestão</span>
         </div>
       </div>
       <div class="flex items-center gap-3">
         <a href="index.html" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-bold px-4 py-2.5 rounded-xl border border-gray-700 transition-all flex items-center gap-2">
-          <i class="fa-solid fa-store text-[#FF5500]"></i>
+          <i class="fa-solid fa-store text-[#FF007F]"></i>
           <span class="hidden sm:inline">Ver Site ao Vivo</span>
         </a>
         <button onclick="logout()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-bold px-3 py-2.5 rounded-xl border border-red-500/20 transition-all">
@@ -74,9 +74,9 @@
       <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
         <div>
           <span class="text-[10px] text-gray-400 font-bold uppercase block">Faturamento (Pagos)</span>
-          <span class="text-xl font-black text-[#FF5500]" id="dashFaturamento">R$ 0,00</span>
+          <span class="text-xl font-black text-[#FF007F]" id="dashFaturamento">R$ 0,00</span>
         </div>
-        <div class="p-3 bg-[#FF5500]/10 text-[#FF5500] rounded-xl text-lg"><i class="fa-solid fa-sack-dollar"></i></div>
+        <div class="p-3 bg-[#FF007F]/10 text-[#FF007F] rounded-xl text-lg"><i class="fa-solid fa-sack-dollar"></i></div>
       </div>
       <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
         <div>
@@ -103,24 +103,24 @@
 
     <!-- MENU DE NAVEGAÇÃO INTERNA -->
     <div class="flex items-center gap-2 mb-6 border-b border-gray-200 pb-3">
-      <button onclick="switchTab('products')" id="tabProductsBtn" class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-[#FF5500] text-white shadow-md shadow-[#FF5500]/20 flex items-center gap-2">
+      <button onclick="switchTab('products')" id="tabProductsBtn" class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-[#FF007F] text-white shadow-md shadow-[#FF007F]/20 flex items-center gap-2">
         <i class="fa-solid fa-boxes-stacked"></i> Catálogo de Produtos
       </button>
       <button onclick="switchTab('orders')" id="tabOrdersBtn" class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 flex items-center gap-2">
-        <i class="fa-solid fa-receipt text-[#FF5500]"></i> Pedidos & Vendas <span id="ordersBadge" class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded-full font-black">0</span>
+        <i class="fa-solid fa-receipt text-[#FF007F]"></i> Pedidos & Vendas <span id="ordersBadge" class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded-full font-black">0</span>
       </button>
     </div>
 
     <!-- ABA 1: CATÁLOGO DE PRODUTOS -->
     <div id="tabProductsView">
       <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <input type="text" id="adminSearch" onkeyup="renderAdminTable()" placeholder="Buscar produto..." class="bg-gray-50 border border-gray-200 text-xs py-2.5 px-4 rounded-xl w-full sm:w-72 focus:outline-none focus:border-[#FF5500]">
+        <input type="text" id="adminSearch" onkeyup="renderAdminTable()" placeholder="Buscar produto..." class="bg-gray-50 border border-gray-200 text-xs py-2.5 px-4 rounded-xl w-full sm:w-72 focus:outline-none focus:border-[#FF007F]">
         
         <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
           <button onclick="resetDefaultCatalog()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-4 py-2.5 rounded-xl text-xs transition-all border border-gray-200 flex items-center gap-2">
             <i class="fa-solid fa-rotate-left"></i> Restaurar Padrão
           </button>
-          <button onclick="openAddProductModal()" class="bg-[#FF5500] hover:bg-[#E64A00] text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all shadow-md shadow-[#FF5500]/20 flex items-center gap-2">
+          <button onclick="openAddProductModal()" class="bg-[#FF007F] hover:bg-[#D10069] text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all shadow-md shadow-[#FF007F]/20 flex items-center gap-2">
             <i class="fa-solid fa-plus"></i> Novo Produto
           </button>
         </div>
@@ -152,20 +152,20 @@
           <p class="text-xs text-gray-500">Gira os pagamentos, status logístico e datas das encomendas.</p>
         </div>
         <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-          <input type="text" id="orderSearch" onkeyup="resetPagination(); renderOrdersTable()" placeholder="Buscar nome, CPF, ID..." class="bg-gray-50 border border-gray-200 text-xs py-2 px-4 rounded-xl w-full sm:w-48 focus:outline-none focus:border-[#FF5500]">
-          <select id="filterDate" onchange="resetPagination(); renderOrdersTable()" class="bg-gray-50 border border-gray-200 text-xs text-gray-700 font-bold py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]">
+          <input type="text" id="orderSearch" onkeyup="resetPagination(); renderOrdersTable()" placeholder="Buscar nome, CPF, ID..." class="bg-gray-50 border border-gray-200 text-xs py-2 px-4 rounded-xl w-full sm:w-48 focus:outline-none focus:border-[#FF007F]">
+          <select id="filterDate" onchange="resetPagination(); renderOrdersTable()" class="bg-gray-50 border border-gray-200 text-xs text-gray-700 font-bold py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF007F]">
             <option value="all">Data: Todas</option>
             <option value="today">Hoje</option>
             <option value="week">Últimos 7 dias</option>
             <option value="month">Últimos 30 dias</option>
           </select>
-          <select id="filterPayment" onchange="resetPagination(); renderOrdersTable()" class="bg-gray-50 border border-gray-200 text-xs text-gray-700 font-bold py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]">
+          <select id="filterPayment" onchange="resetPagination(); renderOrdersTable()" class="bg-gray-50 border border-gray-200 text-xs text-gray-700 font-bold py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF007F]">
             <option value="all">Pagamento: Todos</option>
             <option value="Pago">Apenas Pagos</option>
             <option value="Pendente">Apenas Pendentes</option>
             <option value="Cancelado">Apenas Cancelados</option>
           </select>
-          <select id="filterDelivery" onchange="resetPagination(); renderOrdersTable()" class="bg-gray-50 border border-gray-200 text-xs text-gray-700 font-bold py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]">
+          <select id="filterDelivery" onchange="resetPagination(); renderOrdersTable()" class="bg-gray-50 border border-gray-200 text-xs text-gray-700 font-bold py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF007F]">
             <option value="all">Envio: Todos</option>
             <option value="Recebido">Pedido Recebido</option>
             <option value="Preparando">Em Separação</option>
@@ -173,19 +173,19 @@
             <option value="Entregue">Entregue</option>
           </select>
           <button onclick="loadOrders()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2">
-            <i class="fa-solid fa-arrows-rotate text-[#FF5500]"></i> Atualizar
+            <i class="fa-solid fa-arrows-rotate text-[#FF007F]"></i> Atualizar
           </button>
         </div>
       </div>
 
       <div id="bulkActionsPanel" class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-2">
-          <input type="checkbox" id="selectAllOrders" onchange="toggleSelectAllOrders()" class="w-4 h-4 text-[#FF5500] rounded focus:ring-[#FF5500]">
+          <input type="checkbox" id="selectAllOrders" onchange="toggleSelectAllOrders()" class="w-4 h-4 text-[#FF007F] rounded focus:ring-[#FF007F]">
           <label for="selectAllOrders" class="text-xs font-bold text-gray-700 cursor-pointer">Selecionar Todos na Tela</label>
         </div>
         <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
           <span class="text-[10px] font-bold text-gray-500 uppercase">Ação em Lote:</span>
-          <select id="bulkActionType" class="text-xs bg-gray-50 border border-gray-200 py-1.5 px-2 rounded-lg focus:outline-none focus:border-[#FF5500]">
+          <select id="bulkActionType" class="text-xs bg-gray-50 border border-gray-200 py-1.5 px-2 rounded-lg focus:outline-none focus:border-[#FF007F]">
             <option value="">Selecione...</option>
             <option disabled>--- PAGAMENTO ---</option>
             <option value="pay_Pago">Marcar como Pago</option>
@@ -197,7 +197,7 @@
             <option value="del_Caminho">3. A Caminho</option>
             <option value="del_Entregue">4. Entregue</option>
           </select>
-          <button onclick="applyBulkAction(event)" class="bg-[#FF5500] hover:bg-[#E64A00] text-white font-bold px-3 py-1.5 rounded-lg text-[10px] uppercase transition-all shadow-sm">
+          <button onclick="applyBulkAction(event)" class="bg-[#FF007F] hover:bg-[#D10069] text-white font-bold px-3 py-1.5 rounded-lg text-[10px] uppercase transition-all shadow-sm">
             Aplicar
           </button>
         </div>
@@ -232,12 +232,12 @@
         <div class="border border-gray-200 p-4 rounded-xl bg-gray-50">
             <div class="flex justify-between items-center mb-3">
                 <label class="block text-xs font-bold text-gray-700">Imagens (URL)</label>
-                <button type="button" onclick="addExtraImageField()" class="text-xs text-[#FF5500] font-bold hover:underline">+ Adicionar Imagem Extra</button>
+                <button type="button" onclick="addExtraImageField()" class="text-xs text-[#FF007F] font-bold hover:underline">+ Adicionar Imagem Extra</button>
             </div>
             <div id="imagesContainer" class="space-y-2">
                 <div class="flex items-center gap-2">
                     <span class="text-[10px] font-bold text-gray-500 w-16">Principal</span>
-                    <input type="url" id="formImage" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
+                    <input type="url" id="formImage" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
                 </div>
             </div>
         </div>
@@ -246,7 +246,7 @@
         
         <div class="flex justify-end gap-3 pt-3 border-t border-gray-100">
           <button type="button" onclick="closeProductFormModal()" class="px-4 py-2.5 bg-gray-100 rounded-xl text-xs font-bold">Cancelar</button>
-          <button type="submit" class="px-5 py-2.5 bg-[#FF5500] text-white rounded-xl text-xs font-bold">Salvar Produto</button>
+          <button type="submit" class="px-5 py-2.5 bg-[#FF007F] text-white rounded-xl text-xs font-bold">Salvar Produto</button>
         </div>
       </form>
     </div>
@@ -270,9 +270,9 @@
     
     const defaultFirebaseConfig = {
       apiKey: "AIzaSyBCkwx1KJS_ZvPM0McJOF7_KbPzwahvZgY",
-      authDomain: "malala-ca5f9.firebaseapp.com",
-      projectId: "malala-ca5f9",
-      storageBucket: "malala-ca5f9.firebasestorage.app",
+      authDomain: "mariajoanna-fitness.firebaseapp.com",
+      projectId: "mariajoanna-fitness",
+      storageBucket: "mariajoanna-fitness.firebasestorage.app",
       messagingSenderId: "769152463954",
       appId: "1:769152463954:web:1ee46b91c8e8b4c4d75b8b",
       measurementId: "G-XSB0EFBQ6E"
@@ -289,18 +289,18 @@
       initFirebase();
       loadAdminProducts();
       
-      if (sessionStorage.getItem('malala_logged') === 'true') {
+      if (sessionStorage.getItem('mariajoanna_logged') === 'true') {
         document.getElementById('loginModal').classList.add('hidden');
         loadOrdersFromCloud();
       }
 
       firebase.auth().onAuthStateChanged((user) => {
-        if (user && user.email === 'malalastore.pedidos@gmail.com') {
-          sessionStorage.setItem('malala_logged', 'true');
+        if (user && user.email === 'mariajoannafitness.pedidos@gmail.com') {
+          sessionStorage.setItem('mariajoanna_logged', 'true');
           document.getElementById('loginModal').classList.add('hidden');
           if (ordersList.length === 0) loadOrdersFromCloud();
         } else {
-          if (sessionStorage.getItem('malala_logged') !== 'true') {
+          if (sessionStorage.getItem('mariajoanna_logged') !== 'true') {
             document.getElementById('loginModal').classList.remove('hidden');
           }
         }
@@ -319,10 +319,10 @@
 
     function initFirebaseAdminSync() {
       if (!db) return;
-      db.collection('malala_store').doc('catalog').onSnapshot((doc) => {
+      db.collection('mariajoanna_store').doc('catalog').onSnapshot((doc) => {
         if (doc.exists && doc.data().products) {
           adminProducts = doc.data().products.map(p => ({...p, stock: p.stock !== undefined ? p.stock : 10, images: p.images || []}));
-          localStorage.setItem('malala_products', JSON.stringify(adminProducts));
+          localStorage.setItem('mariajoanna_products', JSON.stringify(adminProducts));
           renderAdminTable();
         }
       });
@@ -331,11 +331,11 @@
     async function handleLogin(e) {
       e.preventDefault();
       const pwd = document.getElementById('adminPassword').value;
-      const adminEmail = 'malalastore.pedidos@gmail.com';
+      const adminEmail = 'mariajoannafitness.pedidos@gmail.com';
 
       try {
         await firebase.auth().signInWithEmailAndPassword(adminEmail, pwd);
-        sessionStorage.setItem('malala_logged', 'true');
+        sessionStorage.setItem('mariajoanna_logged', 'true');
         document.getElementById('loginModal').classList.add('hidden');
         document.getElementById('loginError').classList.add('hidden');
         loadOrdersFromCloud();
@@ -347,7 +347,7 @@
 
     async function logout() {
       try { await firebase.auth().signOut(); } catch(e){}
-      sessionStorage.removeItem('malala_logged');
+      sessionStorage.removeItem('mariajoanna_logged');
       document.getElementById('loginModal').classList.remove('hidden');
     }
 
@@ -355,12 +355,12 @@
       const container = document.getElementById('adminOrdersContainer');
       
       if (!db) {
-        try { ordersList = JSON.parse(localStorage.getItem('malala_orders') || '[]'); } catch(e){}
+        try { ordersList = JSON.parse(localStorage.getItem('mariajoanna_orders') || '[]'); } catch(e){}
         renderOrdersTable();
         return;
       }
 
-      container.innerHTML = `<div class="bg-white p-8 text-center rounded-2xl border border-gray-200"><p class="text-xs font-bold text-gray-400"><i class="fa-solid fa-spinner fa-spin text-[#FF5500] mr-2"></i> Sincronizando pedidos com o Firebase...</p></div>`;
+      container.innerHTML = `<div class="bg-white p-8 text-center rounded-2xl border border-gray-200"><p class="text-xs font-bold text-gray-400"><i class="fa-solid fa-spinner fa-spin text-[#FF007F] mr-2"></i> Sincronizando pedidos com o Firebase...</p></div>`;
 
       try {
         const snapshot = await db.collection('orders').get();
@@ -377,11 +377,11 @@
         });
 
         ordersList = tempOrders;
-        localStorage.setItem('malala_orders', JSON.stringify(ordersList));
+        localStorage.setItem('mariajoanna_orders', JSON.stringify(ordersList));
         renderOrdersTable();
       } catch (err) {
         console.error("❌ Erro ao buscar pedidos do Firebase:", err);
-        try { ordersList = JSON.parse(localStorage.getItem('malala_orders') || '[]'); } catch(e){}
+        try { ordersList = JSON.parse(localStorage.getItem('mariajoanna_orders') || '[]'); } catch(e){}
         renderOrdersTable();
       }
     }
@@ -404,7 +404,7 @@
       document.getElementById('tabProductsView').classList.toggle('hidden', tab !== 'products');
       document.getElementById('tabOrdersView').classList.toggle('hidden', tab !== 'orders');
       
-      const btnActive = "px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-[#FF5500] text-white shadow-md shadow-[#FF5500]/20 flex items-center gap-2";
+      const btnActive = "px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-[#FF007F] text-white shadow-md shadow-[#FF007F]/20 flex items-center gap-2";
       const btnInactive = "px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 flex items-center gap-2";
       
       document.getElementById('tabProductsBtn').className = tab === 'products' ? btnActive : btnInactive;
@@ -489,7 +489,7 @@
 
     async function updatePaymentStatus(orderId, newStatus, skipRender = false) {
       const ord = ordersList.find(o => String(o.id) === String(orderId));
-      if (ord) { ord.status = newStatus; localStorage.setItem('malala_orders', JSON.stringify(ordersList)); }
+      if (ord) { ord.status = newStatus; localStorage.setItem('mariajoanna_orders', JSON.stringify(ordersList)); }
       if (db) {
         try { await db.collection('orders').doc(String(orderId)).update({ status: newStatus }); }
         catch (err) { console.warn("Atualizado localmente."); }
@@ -499,7 +499,7 @@
 
     async function updateDeliveryStatus(orderId, newStatus, skipRender = false) {
       const ord = ordersList.find(o => String(o.id) === String(orderId));
-      if (ord) { ord.deliveryStatus = newStatus; localStorage.setItem('malala_orders', JSON.stringify(ordersList)); }
+      if (ord) { ord.deliveryStatus = newStatus; localStorage.setItem('mariajoanna_orders', JSON.stringify(ordersList)); }
       if (db) {
         try { await db.collection('orders').doc(String(orderId)).update({ deliveryStatus: newStatus }); }
         catch (err) { console.warn("Atualizado localmente."); }
@@ -537,7 +537,7 @@
             <p class="bold">CEP: ${addr.cep || ''}</p>
 
             <div class="footer">
-              Pedido: ${orderId} - Malala Store
+              Pedido: ${orderId} - Maria Joanna Fitness
             </div>
 
             \x3Cscript>
@@ -629,12 +629,12 @@
           <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
             <div class="flex justify-between items-center pb-3 border-b border-gray-100">
               <div class="flex items-center gap-3">
-                <input type="checkbox" value="${ord.id}" ${isChecked} onchange="toggleOrderSelection('${ord.id}', this.checked)" class="order-checkbox w-4 h-4 text-[#FF5500] rounded focus:ring-[#FF5500] mr-2">
+                <input type="checkbox" value="${ord.id}" ${isChecked} onchange="toggleOrderSelection('${ord.id}', this.checked)" class="order-checkbox w-4 h-4 text-[#FF007F] rounded focus:ring-[#FF007F] mr-2">
                 <span class="font-mono text-xs font-black bg-gray-100 px-2 py-1 rounded-md text-gray-700">${ord.id}</span>
                 <span class="text-xs font-bold text-gray-900">${payer.name || payer.email || 'Cliente'}</span>
                 <span class="text-[10px] text-gray-400 ml-2 hidden sm:inline"><i class="fa-regular fa-clock"></i> ${formattedDate}</span>
               </div>
-              <span class="text-xs font-black text-[#FF5500]">R$ ${totalVal.toFixed(2).replace('.',',')}</span>
+              <span class="text-xs font-black text-[#FF007F]">R$ ${totalVal.toFixed(2).replace('.',',')}</span>
             </div>
 
             <div class="flex flex-wrap items-center gap-4 bg-gray-50 p-3 rounded-xl border border-gray-100">
@@ -648,7 +648,7 @@
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[10px] font-bold text-gray-500 uppercase">Envio:</span>
-                <select onchange="updateDeliveryStatus('${ord.id}', this.value)" class="text-[10px] uppercase font-black px-2 py-1 rounded-md bg-white border border-gray-200 focus:outline-none focus:border-[#FF5500]">
+                <select onchange="updateDeliveryStatus('${ord.id}', this.value)" class="text-[10px] uppercase font-black px-2 py-1 rounded-md bg-white border border-gray-200 focus:outline-none focus:border-[#FF007F]">
                   <option value="Recebido" ${delStatus === 'Recebido'?'selected':''}>1. Recebido</option>
                   <option value="Preparando" ${delStatus === 'Preparando'?'selected':''}>2. Preparando</option>
                   <option value="Caminho" ${delStatus === 'Caminho'?'selected':''}>3. A Caminho</option>
@@ -662,7 +662,7 @@
                 <p class="text-[10px] font-bold text-gray-400 mb-1">ENDEREÇO</p>
                 <div class="text-xs bg-gray-50 p-2 rounded-lg border border-gray-100 flex justify-between items-start">
                   <span>${payer.address?.street || 'N/A'}, ${payer.address?.number || 'N/A'}<br>${payer.address?.neighborhood || ''} - ${payer.address?.city || 'N/A'}<br>CEP: ${payer.address?.cep || 'N/A'}</span>
-                  <button onclick="printOrderLabel('${ord.id}')" class="text-[#FF5500] hover:text-[#E64A00] transition-colors p-1" title="Imprimir Etiqueta de Envio">
+                  <button onclick="printOrderLabel('${ord.id}')" class="text-[#FF007F] hover:text-[#D10069] transition-colors p-1" title="Imprimir Etiqueta de Envio">
                     <i class="fa-solid fa-print"></i>
                   </button>
                 </div>
@@ -678,7 +678,7 @@
         html += `
           <div class="flex justify-center mt-6 pt-4 border-t border-gray-200">
             <button onclick="loadMoreOrders()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold px-6 py-3 rounded-xl transition-all border border-gray-200 shadow-sm flex items-center gap-2">
-               <i class="fa-solid fa-plus text-[#FF5500]"></i> Carregar Mais Pedidos (${filtered.length - visibleOrdersCount} restantes)
+               <i class="fa-solid fa-plus text-[#FF007F]"></i> Carregar Mais Pedidos (${filtered.length - visibleOrdersCount} restantes)
             </button>
           </div>
         `;
@@ -689,7 +689,7 @@
 
     function loadAdminProducts() {
       try { 
-          const stored = JSON.parse(localStorage.getItem('malala_products') || '[]'); 
+          const stored = JSON.parse(localStorage.getItem('mariajoanna_products') || '[]');
           if(stored.length > 0) adminProducts = stored;
           else adminProducts = [...defaultProducts];
       } catch(e){ adminProducts = [...defaultProducts]; }
@@ -706,10 +706,10 @@
         <tr class="hover:bg-gray-50/80 transition-colors border-b border-gray-50">
           <td class="p-3 flex items-center gap-3"><img src="${p.image || ''}" class="w-10 h-10 object-cover rounded-lg border border-gray-200"><div><p class="font-bold text-gray-900">${p.title}</p></div></td>
           <td class="p-3 font-bold text-gray-700">${p.category}</td>
-          <td class="p-3 text-center"><input type="number" onchange="updateStockInline(${p.id}, this.value)" value="${p.stock}" class="w-16 bg-white border border-gray-200 text-xs font-bold p-1.5 rounded focus:border-[#FF5500] focus:outline-none text-center shadow-sm"></td>
+          <td class="p-3 text-center"><input type="number" onchange="updateStockInline(${p.id}, this.value)" value="${p.stock}" class="w-16 bg-white border border-gray-200 text-xs font-bold p-1.5 rounded focus:border-[#FF007F] focus:outline-none text-center shadow-sm"></td>
           <td class="p-3 font-black text-gray-900">R$ ${p.price.toFixed(2).replace('.',',')}</td>
           <td class="p-3 text-right">
-            <button onclick="editProduct(${p.id})" class="p-2 bg-gray-100 text-gray-700 hover:text-[#FF5500] rounded-lg mr-1 transition-colors" title="Editar Produto"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="editProduct(${p.id})" class="p-2 bg-gray-100 text-gray-700 hover:text-[#FF007F] rounded-lg mr-1 transition-colors" title="Editar Produto"><i class="fa-solid fa-pen-to-square"></i></button>
             <button onclick="deleteProduct(${p.id})" class="p-2 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg transition-colors" title="Excluir Produto"><i class="fa-solid fa-trash"></i></button>
           </td>
         </tr>
@@ -717,9 +717,9 @@
     }
 
     function saveToLocalStorage() {
-      localStorage.setItem('malala_products', JSON.stringify(adminProducts));
+      localStorage.setItem('mariajoanna_products', JSON.stringify(adminProducts));
       renderAdminTable();
-      if(db) db.collection('malala_store').doc('catalog').set({products: adminProducts, updatedAt: firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
+      if(db) db.collection('mariajoanna_store').doc('catalog').set({products: adminProducts, updatedAt: firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
     }
 
     let extraImagesCount = 0;
@@ -733,7 +733,7 @@
       div.id = `container_${id}`;
       div.innerHTML = `
           <span class="text-[10px] font-bold text-gray-500 w-16 text-right">Extra ${extraImagesCount}</span>
-          <input type="url" id="${id}" value="${val}" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]">
+          <input type="url" id="${id}" value="${val}" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF007F]">
           <button type="button" onclick="document.getElementById('container_${id}').remove(); extraImagesCount--;" class="text-red-500 p-1"><i class="fa-solid fa-trash text-xs"></i></button>
       `;
       document.getElementById('imagesContainer').appendChild(div);
@@ -762,7 +762,7 @@
         document.getElementById('imagesContainer').innerHTML = `
             <div class="flex items-center gap-2">
                 <span class="text-[10px] font-bold text-gray-500 w-16">Principal</span>
-                <input type="url" id="formImage" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
+                <input type="url" id="formImage" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
             </div>
         `;
         document.getElementById('productFormModal').classList.remove('hidden'); 
@@ -785,7 +785,7 @@
         document.getElementById('imagesContainer').innerHTML = `
             <div class="flex items-center gap-2">
                 <span class="text-[10px] font-bold text-gray-500 w-16">Principal</span>
-                <input type="url" id="formImage" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
+                <input type="url" id="formImage" class="flex-1 bg-white border border-gray-200 text-xs py-2 px-3 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
             </div>
         `;
         document.getElementById('formImage').value = p.image;
