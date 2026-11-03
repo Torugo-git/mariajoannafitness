@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- SEO & OPEN GRAPH (PARTILHA NO WHATSAPP/INSTAGRAM) -->
-  <title>MARIA JOANNA FITNESS | Leggings • Tops • Conjuntos</title>
-  <meta name="description" content="Sua loja referência em Leggings, Produtos de Tops e Perfumaria Importada e Árabe. Vai comprando & recebendo com entrega rápida e segura.">
-  <meta property="og:title" content="MARIA JOANNA FITNESS | Produtos Exclusivos">
-  <meta property="og:description" content="Leggings, Tops e Perfumaria Importada. Parcele em até 10x ou ganhe aprovação na hora no PIX.">
+  <title>MALALA STORE | Tecnologia • Beleza • Perfumes</title>
+  <meta name="description" content="Sua loja referência em Tecnologia, Produtos de Beleza e Perfumaria Importada e Árabe. Vai comprando & recebendo com entrega rápida e segura.">
+  <meta property="og:title" content="MALALA STORE | Produtos Exclusivos">
+  <meta property="og:description" content="Tecnologia, Beleza e Perfumaria Importada. Parcele em até 10x ou ganhe aprovação na hora no PIX.">
   <meta property="og:image" content="https://seusite.com/logo-banner.png">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#FF007F">
+  <meta name="theme-color" content="#FF5500">
 
   <!-- Firebase SDK (Compat version for vanilla HTML) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -23,7 +23,7 @@
 
   <script>
     tailwind.config = {
-      theme: { extend: { colors: { brand: { orange: '#FF007F', deepOrange: '#D10069' } } } }
+      theme: { extend: { colors: { brand: { orange: '#FF5500', deepOrange: '#E64A00' } } } }
     }
   </script>
 
@@ -32,7 +32,7 @@
   <style>
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #f1f1f1; }
-    ::-webkit-scrollbar-thumb { background: #FF007F; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: #FF5500; border-radius: 3px; }
 
     .hero-brand-banner { width: 100%; height: 320px; background-image: url('logo-banner.png'); background-size: cover; background-position: center; background-repeat: no-repeat; border-bottom: 1px solid #e5e7eb; }
     @media (min-width: 768px) { .hero-brand-banner { height: 460px; } }
@@ -50,7 +50,7 @@
     @keyframes scrollBrands { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
   </style>
 </head>
-<body class="bg-white text-gray-900 font-sans antialiased selection:bg-[#FF007F] selection:text-white relative">
+<body class="bg-white text-gray-900 font-sans antialiased selection:bg-[#FF5500] selection:text-white relative">
 
   <!-- TOAST NOTIFICATION -->
   <div id="toastNotification" class="fixed top-5 right-5 z-50 transform translate-x-full opacity-0 transition-all duration-300 pointer-events-none">
@@ -69,7 +69,7 @@
   <div class="bg-gray-900 text-gray-200 border-b border-gray-800 text-xs py-2 px-4">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
       <div class="flex items-center gap-4">
-        <span class="flex items-center gap-1.5 text-[#FF007F] font-bold"><i class="fa-solid fa-sparkles"></i> VAI COMPRANDO & RECEBENDO</span>
+        <span class="flex items-center gap-1.5 text-[#FF5500] font-bold"><i class="fa-solid fa-sparkles"></i> VAI COMPRANDO & RECEBENDO</span>
         <span class="hidden md:inline text-gray-700">|</span>
         <span class="text-gray-300 font-medium">Seu próximo favorito está aqui.</span>
       </div>
@@ -86,10 +86,10 @@
 
         <!-- LOGO CIRCULAR -->
         <div class="flex items-center gap-3 cursor-pointer" onclick="selectCategory('Todos')">
-          <img src="logo-circle.png" alt="MARIA JOANNA FITNESS" class="w-12 h-12 object-contain rounded-full shadow-md shadow-[#FF007F]/20 border border-[#FF007F]/30 hover:scale-105 transition-transform">
+          <img src="logo-circle.png" alt="MALALA STORE" class="w-12 h-12 object-contain rounded-full shadow-md shadow-[#FF5500]/20 border border-[#FF5500]/30 hover:scale-105 transition-transform">
           <div class="hidden sm:block">
-            <span class="text-xl font-black tracking-wider text-gray-900 block leading-none font-serif">MARIA JOANNA</span>
-            <span class="text-[10px] text-[#FF007F] font-bold tracking-widest uppercase">STORE</span>
+            <span class="text-xl font-black tracking-wider text-gray-900 block leading-none font-serif">MALALA</span>
+            <span class="text-[10px] text-[#FF5500] font-bold tracking-widest uppercase">STORE</span>
           </div>
         </div>
 
@@ -99,10 +99,10 @@
             type="text"
             id="searchInput"
             onkeyup="filterProducts()"
-            placeholder="O que você procura em Leggings, Tops ou Conjuntos?"
-            class="w-full bg-gray-100 border border-gray-200 text-sm text-gray-900 rounded-xl py-3 pl-4 pr-12 focus:outline-none focus:border-[#FF007F] transition-all placeholder-gray-400 shadow-inner"
+            placeholder="O que você procura em Tecnologia, Beleza ou Perfumes?"
+            class="w-full bg-gray-100 border border-gray-200 text-sm text-gray-900 rounded-xl py-3 pl-4 pr-12 focus:outline-none focus:border-[#FF5500] transition-all placeholder-gray-400 shadow-inner"
           >
-          <button onclick="filterProducts()" class="absolute right-2 top-2 bg-[#FF007F] hover:bg-[#D10069] text-white px-4 py-1.5 rounded-lg text-xs font-bold transition-all">
+          <button onclick="filterProducts()" class="absolute right-2 top-2 bg-[#FF5500] hover:bg-[#E64A00] text-white px-4 py-1.5 rounded-lg text-xs font-bold transition-all">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
@@ -110,8 +110,8 @@
         <!-- AÇÕES / CARRINHO / AUTH -->
         <div class="flex items-center gap-3">
           <!-- BOTÃO ENTRAR / CONTA -->
-          <button id="authBtn" onclick="openAuthModal()" class="flex items-center gap-2 text-xs font-bold bg-gray-100 border border-gray-200 px-3.5 py-2.5 rounded-xl hover:border-[#FF007F] transition-all">
-            <i class="fa-solid fa-user text-[#FF007F]"></i>
+          <button id="authBtn" onclick="openAuthModal()" class="flex items-center gap-2 text-xs font-bold bg-gray-100 border border-gray-200 px-3.5 py-2.5 rounded-xl hover:border-[#FF5500] transition-all">
+            <i class="fa-solid fa-user text-[#FF5500]"></i>
             <span id="authBtnLabel" class="hidden sm:inline">Entrar</span>
           </button>
 
@@ -120,10 +120,10 @@
             <span>Suporte Direct</span>
           </a>
 
-          <button onclick="toggleCart()" class="relative bg-gray-100 border border-gray-200 hover:border-[#FF007F] px-4 py-2.5 rounded-xl flex items-center gap-2.5 transition-all group">
-            <i class="fa-solid fa-bag-shopping text-[#FF007F] text-base"></i>
+          <button onclick="toggleCart()" class="relative bg-gray-100 border border-gray-200 hover:border-[#FF5500] px-4 py-2.5 rounded-xl flex items-center gap-2.5 transition-all group">
+            <i class="fa-solid fa-bag-shopping text-[#FF5500] text-base"></i>
             <span class="text-xs font-bold text-gray-700 group-hover:text-gray-900 hidden sm:inline">Carrinho</span>
-            <span id="cartCount" class="bg-[#FF007F] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">0</span>
+            <span id="cartCount" class="bg-[#FF5500] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">0</span>
           </button>
         </div>
 
@@ -136,10 +136,10 @@
             type="text"
             id="searchInputMobile"
             onkeyup="syncAndFilterMobile()"
-            placeholder="Buscar leggings, tops..."
-            class="w-full bg-gray-100 border border-gray-200 text-xs text-gray-900 rounded-xl py-2.5 pl-3 pr-10 focus:outline-none focus:border-[#FF007F] transition-all placeholder-gray-400"
+            placeholder="Buscar perfume, tech ou beleza..."
+            class="w-full bg-gray-100 border border-gray-200 text-xs text-gray-900 rounded-xl py-2.5 pl-3 pr-10 focus:outline-none focus:border-[#FF5500] transition-all placeholder-gray-400"
           >
-          <button onclick="filterProducts()" class="absolute right-2 top-2 text-[#FF007F] px-2 py-0.5 text-xs">
+          <button onclick="filterProducts()" class="absolute right-2 top-2 text-[#FF5500] px-2 py-0.5 text-xs">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
@@ -151,7 +151,32 @@
   <!-- BANNER DA MARCA 100% LIMPO -->
   <section class="hero-brand-banner"></section>
 
+  <!-- CARROSSEL INFINITO DE MARCAS -->
+  <div class="brands-carousel-container">
+    <div class="brands-carousel-track">
+      <div class="brand-logo" onclick="filterByBrand('Lattafa')"><span>LATTAFA</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Chanel')"><span>CHANEL</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Apple')"><span>APPLE</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Armaf')"><span>ARMAF</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Dior')"><span>DIOR</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Samsung')"><span>SAMSUNG</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Carolina Herrera')"><span>CAROLINA HERRERA</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Xiaomi')"><span>XIAOMI</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Paco Rabanne')"><span>PACO RABANNE</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Azzaro')"><span>AZZARO</span></div>
 
+      <div class="brand-logo" onclick="filterByBrand('Lattafa')"><span>LATTAFA</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Chanel')"><span>CHANEL</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Apple')"><span>APPLE</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Armaf')"><span>ARMAF</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Dior')"><span>DIOR</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Samsung')"><span>SAMSUNG</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Carolina Herrera')"><span>CAROLINA HERRERA</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Xiaomi')"><span>XIAOMI</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Paco Rabanne')"><span>PACO RABANNE</span></div>
+      <div class="brand-logo" onclick="filterByBrand('Azzaro')"><span>AZZARO</span></div>
+    </div>
+  </div>
 
   <!-- MENU DAS 3 CATEGORIAS E MARCAS EM ALTA -->
   <div class="bg-gray-50 border-b border-gray-200 py-4">
@@ -160,7 +185,17 @@
         <!-- Renderizado via JS -->
       </div>
 
-
+      <!-- FILTRO RÁPIDO POR MARCAS POPULARES -->
+      <div class="flex items-center gap-2 overflow-x-auto scrollbar-none pt-2 border-t border-gray-200/60 text-xs">
+        <span class="text-gray-400 font-medium whitespace-nowrap">Marcas em alta:</span>
+        <button onclick="filterByBrand('Lattafa')" class="brand-btn px-2.5 py-1 rounded-md bg-white border border-gray-200 text-gray-700 hover:border-[#FF5500] hover:text-[#FF5500] transition-colors whitespace-nowrap">Lattafa</button>
+        <button onclick="filterByBrand('Armaf')" class="brand-btn px-2.5 py-1 rounded-md bg-white border border-gray-200 text-gray-700 hover:border-[#FF5500] hover:text-[#FF5500] transition-colors whitespace-nowrap">Armaf</button>
+        <button onclick="filterByBrand('Chanel')" class="brand-btn px-2.5 py-1 rounded-md bg-white border border-gray-200 text-gray-700 hover:border-[#FF5500] hover:text-[#FF5500] transition-colors whitespace-nowrap">Chanel</button>
+        <button onclick="filterByBrand('Dior')" class="brand-btn px-2.5 py-1 rounded-md bg-white border border-gray-200 text-gray-700 hover:border-[#FF5500] hover:text-[#FF5500] transition-colors whitespace-nowrap">Dior</button>
+        <button onclick="filterByBrand('Apple')" class="brand-btn px-2.5 py-1 rounded-md bg-white border border-gray-200 text-gray-700 hover:border-[#FF5500] hover:text-[#FF5500] transition-colors whitespace-nowrap">Apple</button>
+        <button onclick="filterByBrand('Xiaomi')" class="brand-btn px-2.5 py-1 rounded-md bg-white border border-gray-200 text-gray-700 hover:border-[#FF5500] hover:text-[#FF5500] transition-colors whitespace-nowrap">Xiaomi</button>
+        <button onclick="selectCategory('Todos')" class="px-2.5 py-1 rounded-md bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors whitespace-nowrap">Limpar Filtros</button>
+      </div>
     </div>
   </div>
 
@@ -168,7 +203,7 @@
   <section class="py-6 bg-white border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
-        <div class="p-2.5 bg-[#FF007F]/10 rounded-lg text-[#FF007F] text-lg">
+        <div class="p-2.5 bg-[#FF5500]/10 rounded-lg text-[#FF5500] text-lg">
           <i class="fa-solid fa-shield-check"></i>
         </div>
         <div>
@@ -178,7 +213,7 @@
       </div>
 
       <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
-        <div class="p-2.5 bg-[#FF007F]/10 rounded-lg text-[#FF007F] text-lg">
+        <div class="p-2.5 bg-[#FF5500]/10 rounded-lg text-[#FF5500] text-lg">
           <i class="fa-solid fa-truck-fast"></i>
         </div>
         <div>
@@ -188,7 +223,7 @@
       </div>
 
       <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
-        <div class="p-2.5 bg-[#FF007F]/10 rounded-lg text-[#FF007F] text-lg">
+        <div class="p-2.5 bg-[#FF5500]/10 rounded-lg text-[#FF5500] text-lg">
           <i class="fa-solid fa-qrcode"></i>
         </div>
         <div>
@@ -218,7 +253,7 @@
       </div>
 
       <div class="flex items-center gap-2">
-        <select id="sortSelect" onchange="sortProducts()" class="bg-gray-100 border border-gray-200 text-xs text-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:border-[#FF007F]">
+        <select id="sortSelect" onchange="sortProducts()" class="bg-gray-100 border border-gray-200 text-xs text-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:border-[#FF5500]">
           <option value="default">Ordenar por: Relevância</option>
           <option value="price-low">Menor Preço</option>
           <option value="price-high">Maior Preço</option>
@@ -236,7 +271,7 @@
   <section class="py-12 bg-gray-50 border-t border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-xl mx-auto mb-8">
-        <span class="text-[#FF007F] text-xs font-bold uppercase tracking-widest">Feedback dos Clientes</span>
+        <span class="text-[#FF5500] text-xs font-bold uppercase tracking-widest">Feedback dos Clientes</span>
         <h2 class="text-2xl font-black text-gray-900 mt-1">Quem compra, recomenda 🔥</h2>
         <p class="text-xs text-gray-500 mt-1">Transparência e atendimento humanizado em cada pedido.</p>
       </div>
@@ -246,7 +281,7 @@
           <div class="flex items-center gap-1 text-amber-400 text-xs mb-3">
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           </div>
-          <p class="text-xs text-gray-600 leading-relaxed italic">"Minha legging chegou super rápido e vestiu perfeitamente! Não fica nada transparente. Atendimento nota 1000!"</p>
+          <p class="text-xs text-gray-600 leading-relaxed italic">"Meu Asad da Lattafa chegou lacrado e original! Atendimento pelo WhatsApp nota 1000, respondeu super rápido!"</p>
           <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
             <span class="font-bold text-gray-900">Rodrigo M.</span>
             <span class="text-[10px] text-gray-400">Cliente Verificado</span>
@@ -257,7 +292,7 @@
           <div class="flex items-center gap-1 text-amber-400 text-xs mb-3">
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           </div>
-          <p class="text-xs text-gray-600 leading-relaxed italic">"Comprei o conjunto mescla e chegou no dia seguinte. Super confortável para o treino de perna!"</p>
+          <p class="text-xs text-gray-600 leading-relaxed italic">"Comprei o Smartwatch e chegou no dia seguinte aqui no RJ. Melhor loja de importados!"</p>
           <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
             <span class="font-bold text-gray-900">Camila S.</span>
             <span class="text-[10px] text-gray-400">Cliente Verificada</span>
@@ -268,7 +303,7 @@
           <div class="flex items-center gap-1 text-amber-400 text-xs mb-3">
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           </div>
-          <p class="text-xs text-gray-600 leading-relaxed italic">"Preço justo e material de ótima qualidade. Já é a minha segunda compra de roupas de academia aqui."</p>
+          <p class="text-xs text-gray-600 leading-relaxed italic">"Preço justo e produtos 100% autênticos. Já é a minha segunda compra de perfumes de nicho."</p>
           <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
             <span class="font-bold text-gray-900">Lucas T.</span>
             <span class="text-[10px] text-gray-400">Cliente Verificado</span>
@@ -283,48 +318,43 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
       <div class="md:col-span-2">
         <div class="flex items-center gap-3 mb-4">
-          <img src="logo-circle.png" alt="MARIA JOANNA FITNESS" class="w-10 h-10 rounded-full border border-[#FF007F]/40">
-          <span class="font-black text-white text-base tracking-widest font-serif">MARIA JOANNA FITNESS</span>
+          <img src="logo-circle.png" alt="MALALA STORE" class="w-10 h-10 rounded-full border border-[#FF5500]/40">
+          <span class="font-black text-white text-base tracking-widest font-serif">MALALA STORE</span>
         </div>
-        <p class="text-gray-400 leading-relaxed mb-5 max-w-sm">Sua loja referência em Leggings, Produtos de Tops e Perfumaria Importada e Árabe. Vai comprando & recebendo.</p>
-        <div class="flex items-center gap-3 mb-6">
-          <a href="https://www.instagram.com/mariajoannafitness/" target="_blank" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-[#FF007F] hover:text-white transition-all">
-            <i class="fa-brands fa-instagram text-sm"></i>
-          </a>
-        </div>
+        <p class="text-gray-400 leading-relaxed mb-5 max-w-sm">Sua loja referência em Tecnologia, Produtos de Beleza e Perfumaria Importada e Árabe. Vai comprando & recebendo.</p>
         <div class="bg-gray-800/50 p-4 rounded-xl border border-gray-700/50 inline-block space-y-1.5 text-[10px] text-gray-400">
-          <p><strong class="text-gray-300">Razão Social:</strong> MARIA JOANNA FITNESS LTDA</p>
-
+          <p><strong class="text-gray-300">Razão Social:</strong> MALALA STORE LTDA</p>
+          <p><strong class="text-gray-300">CNPJ:</strong> 68.931.318/0001-20</p>
           <p><strong class="text-gray-300">Sede:</strong> Rio de Janeiro, RJ - Brasil</p>
         </div>
       </div>
       <div>
         <p class="font-bold text-white text-sm mb-4">Categorias</p>
         <ul class="space-y-2.5 text-gray-400">
-          <li><button onclick="selectCategory('Leggings')" class="hover:text-[#FF007F] transition-colors">Leggings</button></li>
-          <li><button onclick="selectCategory('Tops')" class="hover:text-[#FF007F] transition-colors">Tops</button></li>
-          <li><button onclick="selectCategory('Conjuntos')" class="hover:text-[#FF007F] transition-colors">Conjuntos</button></li>
+          <li><button onclick="selectCategory('Tecnologia')" class="hover:text-[#FF5500] transition-colors">Tecnologia</button></li>
+          <li><button onclick="selectCategory('Beleza')" class="hover:text-[#FF5500] transition-colors">Beleza</button></li>
+          <li><button onclick="selectCategory('Perfumes')" class="hover:text-[#FF5500] transition-colors">Perfumes</button></li>
         </ul>
       </div>
       <div>
         <p class="font-bold text-white text-sm mb-4">Institucional</p>
         <ul class="space-y-2.5 text-gray-400">
-          <li><a href="termos.html#termos" class="hover:text-[#FF007F] transition-colors">Termos de Uso</a></li>
-          <li><a href="termos.html#privacidade" class="hover:text-[#FF007F] transition-colors">Política de Privacidade (LGPD)</a></li>
-          <li><a href="termos.html#trocas" class="hover:text-[#FF007F] transition-colors">Trocas e Devoluções</a></li>
-          <li><a href="termos.html#envio" class="hover:text-[#FF007F] transition-colors">Prazos de Envio</a></li>
+          <li><a href="termos.html#termos" class="hover:text-[#FF5500] transition-colors">Termos de Uso</a></li>
+          <li><a href="termos.html#privacidade" class="hover:text-[#FF5500] transition-colors">Política de Privacidade (LGPD)</a></li>
+          <li><a href="termos.html#trocas" class="hover:text-[#FF5500] transition-colors">Trocas e Devoluções</a></li>
+          <li><a href="termos.html#envio" class="hover:text-[#FF5500] transition-colors">Prazos de Envio</a></li>
         </ul>
       </div>
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-[10px] text-gray-500">
-      <p>&copy; 2026 MARIA JOANNA FITNESS LTDA. Todos os direitos reservados.</p>
+      <p>&copy; 2026 MALALA STORE LTDA. Todos os direitos reservados.</p>
       <p class="flex items-center gap-1.5 font-bold">Ambiente 100% Seguro <i class="fa-solid fa-lock text-emerald-500"></i></p>
     </div>
   </footer>
 
   <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
   <a
-    href="https://wa.me/5521992663800?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Maria%20Joanna%20Fitness%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida."
+    href="https://wa.me/5521992663800?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Malala%20Store%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida."
     target="_blank"
     class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all group"
     title="Falar no WhatsApp"
@@ -342,7 +372,7 @@
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
 
-      <img src="logo-circle.png" class="w-14 h-14 rounded-full mx-auto mb-3 border-2 border-[#FF007F] shadow-md">
+      <img src="logo-circle.png" class="w-14 h-14 rounded-full mx-auto mb-3 border-2 border-[#FF5500] shadow-md">
       <h3 id="authModalTitle" class="text-xl font-extrabold text-gray-900">Entrar na Sua Conta</h3>
       <p id="authModalSub" class="text-xs text-gray-500 mt-1 mb-6">Acompanhe seus pedidos e receba ofertas exclusivas.</p>
 
@@ -361,31 +391,31 @@
       <form onsubmit="handleAuthSubmit(event)" class="space-y-4 text-left">
         <div id="nameFieldContainer" class="hidden">
           <label class="block text-xs font-bold text-gray-700 mb-1">Nome Completo</label>
-          <input type="text" id="authName" placeholder="Seu Nome" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3.5 rounded-xl focus:outline-none focus:border-[#FF007F]">
+          <input type="text" id="authName" placeholder="Seu Nome" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3.5 rounded-xl focus:outline-none focus:border-[#FF5500]">
         </div>
 
         <div>
           <label class="block text-xs font-bold text-gray-700 mb-1">E-mail</label>
-          <input type="email" id="authEmail" placeholder="seuemail@exemplo.com" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3.5 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
+          <input type="email" id="authEmail" placeholder="seuemail@exemplo.com" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3.5 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
         </div>
 
         <div>
           <label class="block text-xs font-bold text-gray-700 mb-1">Senha</label>
-          <input type="password" id="authPassword" placeholder="******" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3.5 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
+          <input type="password" id="authPassword" placeholder="******" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3.5 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
         </div>
 
         <div id="forgotPasswordContainer" class="text-right">
-          <button type="button" onclick="handlePasswordReset()" class="text-[10px] text-gray-500 hover:text-[#FF007F] font-bold transition-colors">Esqueceu a senha?</button>
+          <button type="button" onclick="handlePasswordReset()" class="text-[10px] text-gray-500 hover:text-[#FF5500] font-bold transition-colors">Esqueceu a senha?</button>
         </div>
 
-        <button type="submit" id="authSubmitBtn" class="w-full bg-[#FF007F] hover:bg-[#D10069] text-white font-bold py-3 rounded-xl text-xs transition-all shadow-md shadow-[#FF007F]/20 flex items-center justify-center gap-2">
+        <button type="submit" id="authSubmitBtn" class="w-full bg-[#FF5500] hover:bg-[#E64A00] text-white font-bold py-3 rounded-xl text-xs transition-all shadow-md shadow-[#FF5500]/20 flex items-center justify-center gap-2">
           Entrar
         </button>
       </form>
 
       <div class="mt-6 pt-4 border-t border-gray-100 text-xs text-gray-500">
         <span id="authToggleText">Ainda não tem conta?</span>
-        <button onclick="toggleAuthMode()" id="authToggleBtn" class="font-bold text-[#FF007F] hover:underline ml-1">Criar Conta</button>
+        <button onclick="toggleAuthMode()" id="authToggleBtn" class="font-bold text-[#FF5500] hover:underline ml-1">Criar Conta</button>
       </div>
     </div>
   </div>
@@ -407,50 +437,50 @@
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="block text-xs font-bold text-gray-700 mb-1">Nome</label>
-              <input type="text" id="payFirstName" placeholder="Nome" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
+              <input type="text" id="payFirstName" placeholder="Nome" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
             </div>
             <div>
               <label class="block text-xs font-bold text-gray-700 mb-1">Sobrenome</label>
-              <input type="text" id="payLastName" placeholder="Sobrenome" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
+              <input type="text" id="payLastName" placeholder="Sobrenome" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
             </div>
           </div>
 
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="block text-xs font-bold text-gray-700 mb-1">E-mail</label>
-              <input type="email" id="payEmail" placeholder="seuemail@exemplo.com" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
+              <input type="email" id="payEmail" placeholder="seuemail@exemplo.com" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
             </div>
             <div>
               <label class="block text-xs font-bold text-gray-700 mb-1">CPF</label>
-              <input type="text" id="payCpf" placeholder="000.000.000-00" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
+              <input type="text" id="payCpf" placeholder="000.000.000-00" class="w-full bg-gray-50 border border-gray-200 text-xs py-2.5 px-3 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
             </div>
           </div>
 
           <!-- ENDEREÇO DE ENTREGA -->
           <div class="space-y-3 pt-2 border-t border-gray-100">
-            <span class="block text-xs font-extrabold text-gray-900"><i class="fa-solid fa-location-dot text-[#FF007F]"></i> Endereço de Entrega</span>
+            <span class="block text-xs font-extrabold text-gray-900"><i class="fa-solid fa-location-dot text-[#FF5500]"></i> Endereço de Entrega</span>
             <div class="grid grid-cols-3 gap-2">
               <div>
                 <label class="block text-[10px] font-bold text-gray-600 mb-0.5">CEP</label>
-                <input type="text" id="payCep" placeholder="00000-000" class="w-full bg-gray-50 border border-gray-200 text-xs py-2 px-2.5 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
+                <input type="text" id="payCep" placeholder="00000-000" class="w-full bg-gray-50 border border-gray-200 text-xs py-2 px-2.5 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
               </div>
               <div class="col-span-2">
                 <label class="block text-[10px] font-bold text-gray-600 mb-0.5">Rua / Logradouro</label>
-                <input type="text" id="payStreet" placeholder="Av. Principal, Rua..." class="w-full bg-gray-50 border border-gray-200 text-xs py-2 px-2.5 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
+                <input type="text" id="payStreet" placeholder="Av. Principal, Rua..." class="w-full bg-gray-50 border border-gray-200 text-xs py-2 px-2.5 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
               </div>
             </div>
             <div class="grid grid-cols-3 gap-2">
               <div>
                 <label class="block text-[10px] font-bold text-gray-600 mb-0.5">Número</label>
-                <input type="text" id="payNumber" placeholder="123" class="w-full bg-gray-50 border border-gray-200 text-xs py-2 px-2.5 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
+                <input type="text" id="payNumber" placeholder="123" class="w-full bg-gray-50 border border-gray-200 text-xs py-2 px-2.5 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
               </div>
               <div>
                 <label class="block text-[10px] font-bold text-gray-600 mb-0.5">Bairro</label>
-                <input type="text" id="payNeighborhood" placeholder="Centro" class="w-full bg-gray-50 border border-gray-200 text-xs py-2 px-2.5 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
+                <input type="text" id="payNeighborhood" placeholder="Centro" class="w-full bg-gray-50 border border-gray-200 text-xs py-2 px-2.5 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
               </div>
               <div>
                 <label class="block text-[10px] font-bold text-gray-600 mb-0.5">Cidade / UF</label>
-                <input type="text" id="payCity" placeholder="Rio de Janeiro / RJ" class="w-full bg-gray-50 border border-gray-200 text-xs py-2 px-2.5 rounded-xl focus:outline-none focus:border-[#FF007F]" required>
+                <input type="text" id="payCity" placeholder="Rio de Janeiro / RJ" class="w-full bg-gray-50 border border-gray-200 text-xs py-2 px-2.5 rounded-xl focus:outline-none focus:border-[#FF5500]" required>
               </div>
             </div>
           </div>
@@ -458,8 +488,8 @@
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-2">Forma de Pagamento</label>
             <div class="grid grid-cols-2 gap-3">
-              <label class="border-2 border-[#FF007F] bg-[#FF007F]/5 p-3 rounded-2xl flex items-center gap-3 cursor-pointer">
-                <input type="radio" name="payMethod" value="pix" checked onchange="togglePayMethodUI('pix')" class="text-[#FF007F]">
+              <label class="border-2 border-[#FF5500] bg-[#FF5500]/5 p-3 rounded-2xl flex items-center gap-3 cursor-pointer">
+                <input type="radio" name="payMethod" value="pix" checked onchange="togglePayMethodUI('pix')" class="text-[#FF5500]">
                 <div>
                   <span class="block text-xs font-extrabold text-gray-900"><i class="fa-solid fa-qrcode text-emerald-600"></i> PIX</span>
                   <span class="text-[10px] text-gray-500">Aprovação Imediata</span>
@@ -467,7 +497,7 @@
               </label>
 
               <label class="border-2 border-gray-200 p-3 rounded-2xl flex items-center gap-3 cursor-pointer hover:border-gray-300">
-                <input type="radio" name="payMethod" value="card" onchange="togglePayMethodUI('card')" class="text-[#FF007F]">
+                <input type="radio" name="payMethod" value="card" onchange="togglePayMethodUI('card')" class="text-[#FF5500]">
                 <div>
                   <span class="block text-xs font-extrabold text-gray-900"><i class="fa-solid fa-credit-card text-blue-600"></i> Pagar Online</span>
                   <span class="text-[10px] text-gray-500">via Mercado Pago</span>
@@ -479,9 +509,9 @@
           <!-- CHECKBOX DE TERMOS -->
           <div class="pt-2">
             <label class="flex items-start gap-2.5 cursor-pointer group">
-              <input type="checkbox" id="payTerms" class="mt-0.5 rounded text-[#FF007F] focus:ring-[#FF007F]" required>
+              <input type="checkbox" id="payTerms" class="mt-0.5 rounded text-[#FF5500] focus:ring-[#FF5500]" required>
               <span class="text-[10px] text-gray-500 group-hover:text-gray-700 transition-colors leading-tight">
-                Li e concordo com os <a href="termos.html#termos" target="_blank" class="text-[#FF007F] font-bold hover:underline">Termos de Uso</a>, a <a href="termos.html#privacidade" target="_blank" class="text-[#FF007F] font-bold hover:underline">Política de Privacidade</a> e a regra de <a href="termos.html#trocas" target="_blank" class="text-[#FF007F] font-bold hover:underline">Trocas e Devoluções</a>.
+                Li e concordo com os <a href="termos.html#termos" target="_blank" class="text-[#FF5500] font-bold hover:underline">Termos de Uso</a>, a <a href="termos.html#privacidade" target="_blank" class="text-[#FF5500] font-bold hover:underline">Política de Privacidade</a> e a regra de <a href="termos.html#trocas" target="_blank" class="text-[#FF5500] font-bold hover:underline">Trocas e Devoluções</a>.
               </span>
             </label>
           </div>
@@ -489,7 +519,7 @@
           <div class="pt-4 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <span class="text-xs text-gray-400 block">Total a Pagar</span>
-              <span id="checkoutTotalDisplay" class="text-xl font-black text-[#FF007F]">R$ 0,00</span>
+              <span id="checkoutTotalDisplay" class="text-xl font-black text-[#FF5500]">R$ 0,00</span>
             </div>
             <button type="submit" id="paySubmitBtn" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-6 rounded-xl text-xs transition-all shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2 w-full sm:w-auto">
               <i class="fa-solid fa-qrcode"></i> Gerar Pagamento PIX
@@ -512,7 +542,7 @@
           <label class="block text-xs font-bold text-gray-700 mb-1">Código PIX Copia e Cola</label>
           <div class="flex gap-2">
             <input type="text" id="pixCopyPasteInput" readonly class="w-full bg-gray-100 border border-gray-200 text-[10px] font-mono py-2 px-3 rounded-xl select-all">
-            <button onclick="copyPixCode()" class="bg-[#FF007F] hover:bg-[#D10069] text-white text-xs font-bold px-4 py-2 rounded-xl shrink-0 flex items-center gap-1.5">
+            <button onclick="copyPixCode()" class="bg-[#FF5500] hover:bg-[#E64A00] text-white text-xs font-bold px-4 py-2 rounded-xl shrink-0 flex items-center gap-1.5">
               <i class="fa-solid fa-copy"></i> Copiar
             </button>
           </div>
@@ -533,7 +563,7 @@
     <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white border-l border-gray-200 flex flex-col shadow-2xl">
       <div class="p-5 border-b border-gray-200 flex items-center justify-between bg-gray-50">
         <div class="flex items-center gap-2">
-          <i class="fa-solid fa-bag-shopping text-[#FF007F]"></i>
+          <i class="fa-solid fa-bag-shopping text-[#FF5500]"></i>
           <h3 class="font-bold text-gray-900 text-base">Carrinho de Compras</h3>
         </div>
         <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-900 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -542,13 +572,13 @@
       <div class="p-5 border-t border-gray-200 bg-gray-50 space-y-3">
         <div class="flex justify-between text-base font-bold text-gray-900">
           <span>Total</span>
-          <span id="cartTotal" class="text-[#FF007F]">R$ 0,00</span>
+          <span id="cartTotal" class="text-[#FF5500]">R$ 0,00</span>
         </div>
         <div class="grid grid-cols-2 gap-2">
           <button onclick="checkoutWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs shadow-md shadow-emerald-600/20">
             <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
           </button>
-          <button onclick="openMercadoPagoCheckout()" class="w-full bg-[#FF007F] hover:bg-[#D10069] text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs shadow-md shadow-[#FF007F]/20">
+          <button onclick="openMercadoPagoCheckout()" class="w-full bg-[#FF5500] hover:bg-[#E64A00] text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs shadow-md shadow-[#FF5500]/20">
             <i class="fa-solid fa-credit-card text-base"></i> Pagar Online
           </button>
         </div>
@@ -568,7 +598,7 @@
       <div class="md:w-1/2 bg-gray-50 relative flex flex-col shrink-0">
         <div class="h-52 sm:h-72 relative">
             <img id="modalProductImg" src="" alt="" class="w-full h-full object-cover transition-opacity duration-300">
-            <span id="modalProductBadge" class="absolute top-4 left-4 bg-[#FF007F] text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full shadow"></span>
+            <span id="modalProductBadge" class="absolute top-4 left-4 bg-[#FF5500] text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full shadow"></span>
         </div>
         
         <div id="modalThumbnails" class="flex items-center gap-2 p-3 overflow-x-auto scrollbar-none bg-white border-t border-gray-100">
@@ -579,7 +609,7 @@
       <div class="md:w-1/2 p-5 sm:p-6 flex flex-col justify-between overflow-y-auto max-h-[calc(90vh-13rem)] md:max-h-[85vh]">
         <div>
           <div class="flex items-center justify-between gap-2">
-              <span id="modalProductCategory" class="text-[10px] uppercase font-bold tracking-wider text-[#FF007F]"></span>
+              <span id="modalProductCategory" class="text-[10px] uppercase font-bold tracking-wider text-[#FF5500]"></span>
               <span id="modalProductStock" class="text-[10px] font-bold px-2.5 py-1 rounded-full"></span>
           </div>
           
@@ -588,7 +618,7 @@
 
           <div class="mt-4 p-2.5 sm:p-3 bg-emerald-50 border border-emerald-100 rounded-xl flex items-center gap-2 text-emerald-800 text-xs">
             <i class="fa-solid fa-circle-check text-emerald-600 shrink-0"></i>
-            <span>Produto original com garantia Maria Joanna Fitness</span>
+            <span>Produto original com garantia Malala Store</span>
           </div>
         </div>
 
@@ -602,7 +632,7 @@
           </div>
 
           <div>
-            <button id="modalAddToCartBtn" class="w-full bg-[#FF007F] hover:bg-[#D10069] text-white font-bold py-3.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-[#FF007F]/20">
+            <button id="modalAddToCartBtn" class="w-full bg-[#FF5500] hover:bg-[#E64A00] text-white font-bold py-3.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-[#FF5500]/20">
               <i class="fa-solid fa-cart-plus text-sm"></i> Adicionar ao Carrinho
             </button>
           </div>
@@ -614,19 +644,25 @@
   <!-- SCRIPT -->
   <script>
     const defaultProducts = [
-      { id: 1, title: 'Legging Empina Bumbum Preta', category: 'Leggings', price: 99.90, stock: 15, badge: 'Lançamento', image: 'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Legging com modelagem que valoriza, cós alto e tecido zero transparência. Perfeita para qualquer treino.' },
-      { id: 2, title: 'Top de Sustentação Cruzado', category: 'Tops', price: 59.90, stock: 30, badge: 'Oferta', image: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Top com bojo removível e alças cruzadas nas costas para máximo conforto e sustentação.' },
-      { id: 3, title: 'Conjunto Fitness Ribana Azul', category: 'Conjuntos', price: 149.90, stock: 8, badge: 'Alta Procura', image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Conjunto canelado premium composto por legging e top. Alta elasticidade e conforto térmico.' },
-      { id: 4, title: 'Legging Básica Compressão', category: 'Leggings', price: 79.90, stock: 50, badge: 'Mais Vendido', image: 'https://images.unsplash.com/photo-1579298245158-33e8f568f7d3?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Sua melhor companheira de treino. Tecido encorpado que não marca e não fica transparente.' },
-      { id: 5, title: 'Top Nadador Clássico', category: 'Tops', price: 49.90, stock: 20, badge: 'Básico', image: 'https://images.unsplash.com/photo-1608248593858-a37941fbdf87?auto=format&fit=crop&q=80&w=600', images: [], desc: 'O clássico que não pode faltar. Sustentação média/alta com tecido respirável.' },
-      { id: 6, title: 'Conjunto Sem Costura Mescla', category: 'Conjuntos', price: 169.90, stock: 12, badge: 'Seamless', image: 'https://images.unsplash.com/photo-1603251642139-44754792b023?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Tecnologia sem costura (seamless) que se adapta como uma segunda pele.' }
+      { id: 1, title: 'Smartwatch Series 9 Ultra', category: 'Tecnologia', price: 320.00, stock: 15, badge: 'Lançamento', image: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Caixa de titânio, tela AMOLED com cores vivas e rastreamento completo de saúde e atividades esportivas.' },
+      { id: 2, title: 'Fone Bluetooth TWS Pro', category: 'Tecnologia', price: 180.00, stock: 30, badge: 'Oferta', image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Cancelamento ativo de ruído, som espacial imersivo e bateria com autonomia de até 24 horas.' },
+      { id: 3, title: 'Caixa de Som Bluetooth Premium', category: 'Tecnologia', price: 250.00, stock: 8, badge: 'Alta Potência', image: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Resistente à água IPX7, graves profundos e conexão simultânea com múltiplos dispositivos.' },
+      { id: 11, title: 'Carregador Sem Fio MagSafe 15W Apple', category: 'Tecnologia', price: 160.00, stock: 50, badge: 'Mais Vendido', image: 'https://images.unsplash.com/photo-1622445268465-843d63d6f1bf?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Alinhamento magnético perfeito para recarga rápida sem fio em iPhones e AirPods.' },
+      { id: 4, title: 'Kit Skincare Sérum Vitamina C', category: 'Beleza', price: 149.00, stock: 20, badge: 'Tendência', image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Tratamento facial concentrado para firmeza, hidratação profunda e iluminação natural da pele.' },
+      { id: 5, title: 'Modelador & Escova Secadora 3 em 1', category: 'Beleza', price: 210.00, stock: 12, badge: 'Destaque', image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Seca, alisa e modela com tecnologia cerâmica de íons que protege os fios contra o frizz.' },
+      { id: 12, title: 'Kit Pincéis Profissionais de Maquiagem', category: 'Beleza', price: 129.00, stock: 25, badge: 'Kit VIP', image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Conjunto completo com cerdas macias hipoalergênicas para acabamento impecável.' },
+      { id: 6, title: 'INSOLENCE', category: 'Perfumes', price: 750.00, stock: 5, badge: 'Perfume Árabe', image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=600', images: [], desc: 'O Insolence, da Guerlain, não foi feito para quem quer passar despercebida!\n\n🌸 Violeta envolvente\n💜 Um toque doce e sofisticado\n✨ Uma fragrância marcante, cheia de personalidade!' },
+      { id: 9, title: 'Delilah Pour Femme', category: 'Perfumes', price: 750.00, stock: 7, badge: 'Perfume Árabe', image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Delilah Pour Femme\nUm perfume feminino, sofisticado e envolvente — perfeito para quem ama deixar uma fragrância inesquecível por onde passa. 💗' },
+      { id: 10, title: 'ASAD ELIXIR – Lattafa', category: 'Perfumes', price: 750.00, stock: 3, badge: 'Nicho', image: 'https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Presença marcante, elegância e aquele aroma que não passa despercebido.\n\n✨ Sofisticado\n🔥 Intenso\n🖤 Marcante' },
+      { id: 13, title: 'ASAD BOURBON - Lattafa', category: 'Perfumes', price: 750.00, stock: 10, badge: 'Perfume Árabe', image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Uma fragrância marcante, sofisticada e envolvente para quem gosta de chegar deixando sua assinatura. 🖤✨' },
+      { id: 14, title: 'Fakhar Lattafa', category: 'Perfumes', price: 750.00, stock: 4, badge: 'Importado', image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&q=80&w=600', images: [], desc: 'Fakhar Lattafa traz uma fragrância marcante, sofisticada e envolvente — daquelas que deixam presença mesmo depois que você passa.' }
     ];
 
     const defaultFirebaseConfig = {
       apiKey: "AIzaSyBCkwx1KJS_ZvPM0McJOF7_KbPzwahvZgY",
-      authDomain: "mariajoanna-fitness.firebaseapp.com",
-      projectId: "mariajoanna-fitness",
-      storageBucket: "mariajoanna-fitness.firebasestorage.app",
+      authDomain: "malala-ca5f9.firebaseapp.com",
+      projectId: "malala-ca5f9",
+      storageBucket: "malala-ca5f9.firebasestorage.app",
       messagingSenderId: "769152463954",
       appId: "1:769152463954:web:1ee46b91c8e8b4c4d75b8b",
       measurementId: "G-XSB0EFBQ6E"
@@ -636,7 +672,7 @@
 
     function initFirebaseClient() {
       let config = defaultFirebaseConfig;
-      const savedCfg = localStorage.getItem('mariajoannafitness_firebase_config');
+      const savedCfg = localStorage.getItem('malala_firebase_config');
       if (savedCfg) {
         try { config = JSON.parse(savedCfg); } catch(e) {}
       }
@@ -650,7 +686,7 @@
     }
 
     function loadProducts() {
-      const stored = localStorage.getItem('mariajoanna_products');
+      const stored = localStorage.getItem('malala_products');
       if (stored) {
         try {
           return JSON.parse(stored).map(p => ({
@@ -660,7 +696,7 @@
           }));
         } catch(e) { console.error(e); }
       }
-      localStorage.setItem('mariajoanna_products', JSON.stringify(defaultProducts));
+      localStorage.setItem('malala_products', JSON.stringify(defaultProducts));
       return defaultProducts;
     }
 
@@ -668,14 +704,14 @@
 
     function initFirebaseSync() {
       if (!db) return;
-      db.collection('mariajoanna_store').doc('catalog').onSnapshot((doc) => {
+      db.collection('malala_store').doc('catalog').onSnapshot((doc) => {
         if (doc.exists && doc.data().products) {
           products = doc.data().products.map(p => ({
             ...p,
             stock: p.stock !== undefined ? p.stock : 10,
             images: p.images || []
           }));
-          localStorage.setItem('mariajoanna_products', JSON.stringify(products));
+          localStorage.setItem('malala_products', JSON.stringify(products));
           renderProducts();
           verifyCartStock(); 
         }
@@ -704,9 +740,9 @@
 
     const categories = [
       { name: 'Todos', icon: 'fa-border-all' },
-      { name: 'Leggings', icon: 'fa-person-running' },
-      { name: 'Tops', icon: 'fa-shirt' },
-      { name: 'Conjuntos', icon: 'fa-dumbbell' }
+      { name: 'Tecnologia', icon: 'fa-microchip' },
+      { name: 'Beleza', icon: 'fa-wand-magic-sparkles' },
+      { name: 'Perfumes', icon: 'fa-spray-can' }
     ];
 
     let currentCategory = 'Todos';
@@ -932,11 +968,11 @@
 
         if (data.status === 'Pago') {
           clearInterval(pixPollingInterval);
-          window.location.href = 'https://www.mariajoannafitness.com.br/minha-conta.html';
+          window.location.href = 'https://www.malalastore.com.br/minha-conta.html';
         } else if (data.status === 'Cancelado') {
            clearInterval(pixPollingInterval);
            alert('Este pedido foi cancelado.');
-           window.location.href = 'https://www.mariajoannafitness.com.br/index.html';
+           window.location.href = 'https://www.malalastore.com.br/index.html';
         }
       } catch (err) {
         console.warn('Erro ao verificar status do PIX:', err);
@@ -980,7 +1016,7 @@
       btn.classList.replace('hover:bg-emerald-500', 'hover:bg-gray-500');
 
       try {
-       const backendUrl = 'https://mariajoanna-fitness-backend.onrender.com';
+       const backendUrl = 'https://malala-backend-1.onrender.com';
        const controller = new AbortController();
        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 seconds timeout
 
@@ -1132,8 +1168,8 @@
     function renderCategories() {
       const container = document.getElementById('categoriesContainer');
       container.innerHTML = categories.map(cat => `
-        <button onclick="selectCategory('${cat.name}')" class="flex items-center gap-2 whitespace-nowrap px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${currentCategory === cat.name && !currentBrandFilter ? 'bg-[#FF007F] text-white shadow-md shadow-[#FF007F]/25' : 'bg-white text-gray-700 hover:text-gray-900 hover:bg-gray-100 border border-gray-200'}">
-          <i class="fa-solid ${cat.icon} text-sm ${currentCategory === cat.name && !currentBrandFilter ? 'text-white' : 'text-[#FF007F]'}"></i>
+        <button onclick="selectCategory('${cat.name}')" class="flex items-center gap-2 whitespace-nowrap px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${currentCategory === cat.name && !currentBrandFilter ? 'bg-[#FF5500] text-white shadow-md shadow-[#FF5500]/25' : 'bg-white text-gray-700 hover:text-gray-900 hover:bg-gray-100 border border-gray-200'}">
+          <i class="fa-solid ${cat.icon} text-sm ${currentCategory === cat.name && !currentBrandFilter ? 'text-white' : 'text-[#FF5500]'}"></i>
           <span>${cat.name}</span>
         </button>
       `).join('');
@@ -1198,7 +1234,7 @@
             <i class="fa-solid fa-magnifying-glass text-3xl text-gray-300 mb-2"></i>
             <p class="text-sm font-bold text-gray-700">Nenhum produto encontrado</p>
             <p class="text-xs text-gray-400 mt-1">Tente pesquisar outro termo ou selecione uma categoria acima.</p>
-            <button onclick="selectCategory('Todos')" class="mt-4 px-4 py-2 bg-[#FF007F] text-white text-xs font-bold rounded-xl shadow-md">Ver todos os produtos</button>
+            <button onclick="selectCategory('Todos')" class="mt-4 px-4 py-2 bg-[#FF5500] text-white text-xs font-bold rounded-xl shadow-md">Ver todos os produtos</button>
           </div>
         `;
         return;
@@ -1210,23 +1246,23 @@
             ? `<div class="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10 flex items-center justify-center"><span class="bg-gray-900 text-white font-black text-xs px-4 py-2 rounded-xl uppercase tracking-widest shadow-xl border border-gray-700 -rotate-6">Esgotado</span></div>` 
             : '';
             
-        const btnClass = isOutOfStock ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-[#FF007F] hover:bg-[#D10069] text-white shadow-md shadow-[#FF007F]/20';
+        const btnClass = isOutOfStock ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-[#FF5500] hover:bg-[#E64A00] text-white shadow-md shadow-[#FF5500]/20';
 
         return `
-        <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-[#FF007F]/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative">
+        <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-[#FF5500]/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative">
           ${stockBadge}
           <div>
             <div class="relative h-48 bg-gray-50 overflow-hidden cursor-pointer" onclick="openProductModal(${p.id})">
               <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <span class="absolute top-2.5 left-2.5 bg-[#FF007F] text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full shadow z-20">${p.badge}</span>
-              <button class="absolute bottom-2.5 right-2.5 bg-white/90 hover:bg-white text-gray-800 text-[10px] font-bold px-2.5 py-1.5 rounded-lg shadow backdrop-blur-sm flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-20"><i class="fa-solid fa-eye text-[#FF007F]"></i> Espiar</button>
+              <span class="absolute top-2.5 left-2.5 bg-[#FF5500] text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full shadow z-20">${p.badge}</span>
+              <button class="absolute bottom-2.5 right-2.5 bg-white/90 hover:bg-white text-gray-800 text-[10px] font-bold px-2.5 py-1.5 rounded-lg shadow backdrop-blur-sm flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-20"><i class="fa-solid fa-eye text-[#FF5500]"></i> Espiar</button>
             </div>
             <div class="p-4 cursor-pointer" onclick="openProductModal(${p.id})">
               <div class="flex justify-between items-center">
-                  <span class="text-[10px] uppercase font-bold tracking-wider text-[#FF007F]">${p.category}</span>
+                  <span class="text-[10px] uppercase font-bold tracking-wider text-[#FF5500]">${p.category}</span>
                   ${!isOutOfStock && p.stock <= 3 ? `<span class="text-[9px] font-bold text-amber-600 bg-amber-100 px-1.5 py-0.5 rounded">Resta(m) ${p.stock}</span>` : ''}
               </div>
-              <h3 class="font-bold text-gray-900 text-sm mt-1 line-clamp-1 group-hover:text-[#FF007F] transition-colors">${p.title}</h3>
+              <h3 class="font-bold text-gray-900 text-sm mt-1 line-clamp-1 group-hover:text-[#FF5500] transition-colors">${p.title}</h3>
               <p class="text-xs text-gray-500 mt-1 line-clamp-2">${p.desc}</p>
             </div>
           </div>
@@ -1269,13 +1305,13 @@
           stockEl.innerText = `ESTOQUE: ${p.stock}`;
           stockEl.className = "text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200";
           addBtn.disabled = false; 
-          addBtn.className = "w-full bg-[#FF007F] hover:bg-[#D10069] text-white font-bold py-3.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-[#FF007F]/20";
+          addBtn.className = "w-full bg-[#FF5500] hover:bg-[#E64A00] text-white font-bold py-3.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-[#FF5500]/20";
       }
 
       const thumbsContainer = document.getElementById('modalThumbnails');
       if (p.images && p.images.length > 0) {
           const allImages = [p.image, ...p.images];
-          thumbsContainer.innerHTML = allImages.map(imgUrl => `<button onclick="setModalImage('${imgUrl}')" class="w-14 h-14 shrink-0 rounded-lg overflow-hidden border-2 border-transparent hover:border-[#FF007F] focus:border-[#FF007F] transition-colors bg-white"><img src="${imgUrl}" class="w-full h-full object-cover"></button>`).join('');
+          thumbsContainer.innerHTML = allImages.map(imgUrl => `<button onclick="setModalImage('${imgUrl}')" class="w-14 h-14 shrink-0 rounded-lg overflow-hidden border-2 border-transparent hover:border-[#FF5500] focus:border-[#FF5500] transition-colors bg-white"><img src="${imgUrl}" class="w-full h-full object-cover"></button>`).join('');
           thumbsContainer.classList.remove('hidden');
       } else {
           thumbsContainer.innerHTML = '';
@@ -1321,7 +1357,7 @@
         container.innerHTML = cart.map(i => `
           <div class="bg-gray-50 p-3 rounded-xl flex items-center gap-3 border border-gray-200">
             <img src="${i.image}" class="w-14 h-14 object-cover rounded-lg bg-white border border-gray-200">
-            <div class="flex-1"><h4 class="text-xs font-bold text-gray-900 line-clamp-1">${i.title}</h4><p class="text-xs text-[#FF007F] font-black mt-0.5">R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}</p><div class="flex items-center gap-2 mt-2"><div class="flex items-center border border-gray-300 bg-white rounded-lg overflow-hidden text-xs"><button onclick="changeQty(${i.id}, -1)" class="px-2 py-0.5 hover:bg-gray-100 text-gray-600 font-bold">-</button><span class="px-2 py-0.5 font-bold text-gray-900">${i.qty}</span><button onclick="changeQty(${i.id}, 1)" class="px-2 py-0.5 hover:bg-gray-100 text-gray-600 font-bold">+</button></div></div></div>
+            <div class="flex-1"><h4 class="text-xs font-bold text-gray-900 line-clamp-1">${i.title}</h4><p class="text-xs text-[#FF5500] font-black mt-0.5">R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}</p><div class="flex items-center gap-2 mt-2"><div class="flex items-center border border-gray-300 bg-white rounded-lg overflow-hidden text-xs"><button onclick="changeQty(${i.id}, -1)" class="px-2 py-0.5 hover:bg-gray-100 text-gray-600 font-bold">-</button><span class="px-2 py-0.5 font-bold text-gray-900">${i.qty}</span><button onclick="changeQty(${i.id}, 1)" class="px-2 py-0.5 hover:bg-gray-100 text-gray-600 font-bold">+</button></div></div></div>
             <button onclick="cart = cart.filter(x => x.id !== ${i.id}); updateCart();" class="text-gray-400 hover:text-red-500 p-1.5 transition-colors"><i class="fa-solid fa-trash text-xs"></i></button>
           </div>
         `).join('');
@@ -1333,7 +1369,7 @@
 
     function checkoutWhatsApp() {
       if (cart.length === 0) return alert('Seu carrinho está vazio!');
-      let msg = '*NOVO PEDIDO - MARIA JOANNA FITNESS*\n\n';
+      let msg = '*NOVO PEDIDO - MALALA STORE*\n\n';
       cart.forEach(i => msg += `• ${i.qty}x ${i.title} - R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}\n`);
       msg += `\n*Total do Pedido:* R$ ${cart.reduce((a,b) => a + (b.price * b.qty), 0).toFixed(2).replace('.', ',')}\n\nPodemos fechar o pedido?`;
       window.open(`https://wa.me/5521992663800?text=${encodeURIComponent(msg)}`, '_blank');
